@@ -1,0 +1,17 @@
+title: "Ayushi Chadha"
+tagline: "Independent research on hierarchical reasoning & subgoals"
+description: "Notes and experiments on small reasoning systems, HRM, and subgoal-augmented architectures."
+author: "Ayushi Chadha"
+url: "https://ayushichadha.github.io"
+
+theme: minima
+
+# Show these pages in the top nav
+header_pages:
+  - index.md
+  - research.md
+  - about.md
+
+# Optional: social links (fill if you want)
+github_username: Ayushichadha
+twitter_username: AyushiChadha24
