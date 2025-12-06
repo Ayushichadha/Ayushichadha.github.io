@@ -2,6 +2,7 @@
 layout: page
 title: "Research"
 permalink: /research/
+mathjax: true
 ---
 
 ## Subgoal-Augmented Hierarchical Reasoning Model (HRM)

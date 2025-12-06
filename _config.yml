@@ -4,7 +4,8 @@ description: "Notes and experiments on small reasoning systems, HRM, and subgoal
 author: "Ayushi Chadha"
 url: "https://ayushichadha.github.io"
 
-theme: minima
+# Remove theme to use custom layouts
+# theme: minima
 
 # Show these pages in the top nav
 header_pages:
@@ -15,3 +16,11 @@ header_pages:
 # Optional: social links (fill if you want)
 github_username: Ayushichadha
 twitter_username: AyushiChadha24
+
+# Enable MathJax
+mathjax: true
+
+# Plugins
+plugins:
+  - jekyll-sass-converter
+  - jekyll-feed

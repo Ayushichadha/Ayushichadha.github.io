@@ -1,7 +1,9 @@
 ---
-layout: page
+layout: post
 title: "Subgoal-Augmented Hierarchical Reasoning"
-permalink: /research/
+date: 2025-11-28
+mathjax: true
+permalink: /research/subgoal-augmented-hrm/
 ---
 
 ## Contents
@@ -16,7 +18,7 @@ permalink: /research/
 
 ---
 
-## Cognitive Core Reasoning
+## Cognitive Core Reasoning {#introduction}
 
 Modern large-scale language models conflate two logically distinct components: (1) a vast statistical memory of the world, and (2) a computational substrate that carries out inference, abstraction, and control.
 The notion of a cognitive core starts from the hypothesis that these can be separated. Instead of a single model that simultaneously memorises most of the internet and performs all computation, we can imagine a compact network whose parameters are devoted almost entirely to procedural competence: algorithms for multi-step inference, search over latent states, hierarchical control, and credit assignment. Factual and episodic knowledge can then be offloaded to external memory, retrieval systems, or larger frozen language models.
@@ -42,7 +44,7 @@ Together, they shift the design compass toward a cognitive core: a model that de
 
 ---
 
-## Algorithm and Architecture
+## Algorithm and Architecture {#algorithm-and-architecture}
 
 At a high level, the baseline HRM can be described in two interacting pieces:
 
@@ -61,7 +63,7 @@ Every $K$ steps (i.e., when $t$ hits a manager boundary), we:
 2. Update the manager state $m_{\tau+1}$.
 3. Broadcast this updated manager context to the worker for the next $K$-step window.
 
-### Feudal subgoal head
+### Feudal subgoal head {#feudal-subgoal-head}
 
 My extension adds a **subgoal head** on top of the manager:
 
@@ -84,9 +86,9 @@ So structurally:
    - Input: token / observation, previous $h_t$, current manager state $m_{\tau}$, and subgoal $g_\tau$.  
    - Output: new $h_{t+1}$, predictions.
 
-### Feudal loss
+### Feudal loss {#feudal-loss}
 
-To actually *train* the subgoals, I add an auxiliary loss that encourages the worker’s change in state over a window to align with the manager’s chosen direction. Concretely, for each window:
+To actually *train* the subgoals, I add an auxiliary loss that encourages the worker's change in state over a window to align with the manager's chosen direction. Concretely, for each window:
 
 - Let $h_{\text{start}}$ and $h_{\text{end}}$ be the worker states at the beginning and end of the window.
 - Define a **direction of progress**:
@@ -108,7 +110,7 @@ where $\mathcal{L}_{\text{task}}$ is the usual cross-entropy / puzzle loss, and 
 
 ---
 
-## Does the math of HRM and Feudal Networks clash?
+## Does the math of HRM and Feudal Networks clash? {#does-the-math-of-hrm-and-feudal-networks-clash}
 
 Mathematically, the two ideas **fit together cleanly**:
 
@@ -129,9 +131,9 @@ The only “tension” is practical, not mathematical: if $\lambda_{\text{feudal
 
 ---
 
-## How feudal subgoals improve HRM (intuitively)
+## How feudal subgoals improve HRM (intuitively) {#how-feudal-subgoals-improve-hrm-intuitively}
 
-The motivation for adding feudal subgoals is to give the manager a **more structured role** than just “being another context vector”:
+The motivation for adding feudal subgoals is to give the manager a **more structured role** than just "being another context vector":
 
 1. **Better credit assignment for the manager**  
    In vanilla HRM, the manager’s influence on performance is often several steps away: it sets a state, the worker runs for a while, and only then do we see whether the puzzle was solved. With feudal subgoals, each manager update gets an immediate, dense signal: *did the worker’s latent trajectory move roughly in the direction I asked for?* This gives the manager a local objective that aligns with its global role.
@@ -147,9 +149,9 @@ The motivation for adding feudal subgoals is to give the manager a **more struct
 
 ---
 
-## Results from experiments
+## Results from experiments {#results-from-experiments}
 
-I’ve been testing this Subgoal-Augmented HRM on small, ARC-mini–style grid puzzles with a supervised learning setup (predicting target grids from input grids). Some early, but consistent, observations:
+I've been testing this Subgoal-Augmented HRM on small, ARC-mini–style grid puzzles with a supervised learning setup (predicting target grids from input grids). Some early, but consistent, observations:
 
 - **Setup**
   - **Baseline:** vanilla HRM with a two-level recurrent architecture (manager + worker), no feudal loss.
