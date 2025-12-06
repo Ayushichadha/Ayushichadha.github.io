@@ -1,9 +1,7 @@
 ---
-layout: post
+layout: page
 title: "Subgoal-Augmented Hierarchical Reasoning"
-date: 2025-11-28
-mathjax: true
-permalink: /research/subgoal-augmented-hrm/
+permalink: /research/
 ---
 
 ## Contents
@@ -44,7 +42,7 @@ Together, they shift the design compass toward a cognitive core: a model that de
 
 ---
 
-## Algorithm and Architecture {#algorithm-and-architecture}
+## Algorithm and Architecture
 
 At a high level, the baseline HRM can be described in two interacting pieces:
 
@@ -63,7 +61,7 @@ Every $K$ steps (i.e., when $t$ hits a manager boundary), we:
 2. Update the manager state $m_{\tau+1}$.
 3. Broadcast this updated manager context to the worker for the next $K$-step window.
 
-### Feudal subgoal head {#feudal-subgoal-head}
+### Feudal subgoal head
 
 My extension adds a **subgoal head** on top of the manager:
 
@@ -86,7 +84,7 @@ So structurally:
    - Input: token / observation, previous $h_t$, current manager state $m_{\tau}$, and subgoal $g_\tau$.  
    - Output: new $h_{t+1}$, predictions.
 
-### Feudal loss {#feudal-loss}
+### Feudal loss
 
 To actually *train* the subgoals, I add an auxiliary loss that encourages the worker's change in state over a window to align with the manager's chosen direction. Concretely, for each window:
 
@@ -110,7 +108,7 @@ where $\mathcal{L}_{\text{task}}$ is the usual cross-entropy / puzzle loss, and 
 
 ---
 
-## Does the math of HRM and Feudal Networks clash? {#does-the-math-of-hrm-and-feudal-networks-clash}
+## Does the math of HRM and Feudal Networks clash?
 
 Mathematically, the two ideas **fit together cleanly**:
 
@@ -131,7 +129,7 @@ The only “tension” is practical, not mathematical: if $\lambda_{\text{feudal
 
 ---
 
-## How feudal subgoals improve HRM (intuitively) {#how-feudal-subgoals-improve-hrm-intuitively}
+## How feudal subgoals improve HRM (intuitively)
 
 The motivation for adding feudal subgoals is to give the manager a **more structured role** than just "being another context vector":
 
@@ -149,7 +147,7 @@ The motivation for adding feudal subgoals is to give the manager a **more struct
 
 ---
 
-## Results from experiments {#results-from-experiments}
+## Results from experiments
 
 I've been testing this Subgoal-Augmented HRM on small, ARC-mini–style grid puzzles with a supervised learning setup (predicting target grids from input grids). Some early, but consistent, observations:
 
