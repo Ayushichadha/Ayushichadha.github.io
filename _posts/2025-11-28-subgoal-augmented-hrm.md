@@ -1,27 +1,158 @@
 ---
-layout: post
-title: "Subgoal-Augmented Hierarchical Reasoning (HRM + Feudal Subgoals)"
+layout: page
+title: "Subgoal-Augmented Hierarchical Reasoning"
+permalink: /research/
 ---
 
-My main independent project builds on the **Hierarchical Reasoning Model (HRM)** — a compact, brain-inspired recurrent architecture that separates reasoning into two coupled modules:
+## Contents
 
-- a **slow high-level module** that updates infrequently and sets the direction of reasoning, and
-- a **fast low-level module** that performs detailed step-by-step computation.
+- [Introduction](#introduction)
+- [Algorithm and Architecture](#algorithm-and-architecture)
+  - [Feudal subgoal head](#feudal-subgoal-head)
+  - [Feudal loss](#feudal-loss)
+- [Does the math of HRM and Feudal Networks clash?](#does-the-math-of-hrm-and-feudal-networks-clash)
+- [How feudal subgoals improve HRM (intuitively)](#how-feudal-subgoals-improve-hrm-intuitively)
+- [Results from experiments](#results-from-experiments)
 
-HRM offers an alternative to chain-of-thought style approaches for difficult reasoning tasks (ARC-like puzzles, extreme Sudoku, maze navigation) by performing deep latent computation with adaptive computation time rather than generating long textual explanations.
+---
 
-In this post I describe a simple extension: a **feudal-style subgoal head** that helps the high-level controller coordinate the low-level processing.
+## Introduction
 
-- The high-level module periodically emits a **latent subgoal vector**.
-- The low-level module is conditioned on that subgoal while it runs for several steps, biasing its trajectory through latent state-space.
-- An auxiliary **feudal loss** encourages the change in the low-level state to align with the subgoal direction, similar in spirit to Feudal Networks from hierarchical reinforcement learning.
+Most current work on “reasoning” in language models still looks like **better prompting for the same flat transformer**: we ask the model to write longer chain-of-thoughts, or to self-reflect, but the computation graph underneath is unchanged. The **Hierarchical Reasoning Model (HRM)** takes a different route. Instead of stretching a single stream of tokens, it separates reasoning into two coupled time-scales: a **slow, high-level module** that updates infrequently and decides *where* to push the computation, and a **fast, low-level module** that does the token-by-token work.
 
-Early experiments on ARC-like grid puzzles show that providing a small amount of subgoal supervision improves both training loss and downstream accuracy compared to a vanilla HRM baseline. Intuitively, the subgoal signal helps the modules specialize: the high-level unit learns to propose useful intermediate objectives while the low-level unit focuses on executing them.
+My project asks a concrete question inside this paradigm: *if we treat the high-level module as a “manager”, can we train it to emit explicit **directional subgoals** in latent space, and does that actually help the worker reason better?* Inspired by Feudal Networks in hierarchical RL, I add a small **feudal subgoal head** on top of HRM’s manager and train it with an auxiliary “alignment” loss. The goal is not to make the model memorize more facts, but to make it **better at planning and coordinating multi-step computation**—a small step toward the kind of compact “cognitive core” I eventually want: a model whose primary skill is to think, not to store the world.
 
-Why I find this promising:
+---
 
-- It enforces an explicit separation between planning and execution inside a compact recurrent core.
-- It can be trained with modest amounts of supervision (or auxiliary objectives) to improve coordination.
-- It points toward small, reusable “cognitive cores” that implement algorithms of reasoning and can be plugged into larger systems.
+## Algorithm and Architecture
 
-Code and detailed experimental notes will appear here when ready. For now, this post records the architecture idea and preliminary results.
+At a high level, the baseline HRM can be described in two interacting pieces:
+
+- A **manager (slow module)** with hidden state $m_t$ that updates every $K$ steps.
+- A **worker (fast module)** with hidden state $h_t$ that updates at every token / time-step.
+
+On most steps, only the worker runs:
+
+- The worker takes the current token (or grid observation), the previous worker state $h_t$, and a *cached* manager state $m_{\tau}$ from the last manager update, and produces:
+  - the next worker state $h_{t+1}$
+  - the usual language-model or puzzle head outputs (logits, actions, etc.).
+
+Every $K$ steps (i.e., when $t$ hits a manager boundary), we:
+
+1. Aggregate information from the last $K$ worker steps (e.g., via the final worker state or a pooled summary).
+2. Update the manager state $m_{\tau+1}$.
+3. Broadcast this updated manager context to the worker for the next $K$-step window.
+
+### Feudal subgoal head
+
+My extension adds a **subgoal head** on top of the manager:
+
+- At each manager update index $\tau$, the manager produces a **subgoal vector**
+  $$
+  g_\tau \in \mathbb{R}^d
+  $$
+  in the same latent space as the worker’s hidden state, or a projection of it.
+- For the next $K$ worker steps $t \in [\tau K, (\tau+1)K)$, the worker is *conditioned* on this subgoal:
+  - either by concatenating $g_\tau$ to its input,
+  - or by using it as an affine modulation / bias inside the worker’s blocks.
+
+So structurally:
+
+1. **Manager forward (every $K$ steps)**  
+   - Input: summary of recent worker states.  
+   - Output: new $m_{\tau+1}$, plus subgoal vector $g_{\tau+1}$.
+
+2. **Worker forward (every step)**  
+   - Input: token / observation, previous $h_t$, current manager state $m_{\tau}$, and subgoal $g_\tau$.  
+   - Output: new $h_{t+1}$, predictions.
+
+### Feudal loss
+
+To actually *train* the subgoals, I add an auxiliary loss that encourages the worker’s change in state over a window to align with the manager’s chosen direction. Concretely, for each window:
+
+- Let $h_{\text{start}}$ and $h_{\text{end}}$ be the worker states at the beginning and end of the window.
+- Define a **direction of progress**:
+  $$
+  \Delta h_\tau = h_{\text{end}} - h_{\text{start}}.
+  $$
+- Encourage $\Delta h_\tau$ to align with $g_\tau$ using a cosine-similarity based term:
+  $$
+  \mathcal{L}_{\text{feudal},\tau}
+    = - \cos(\Delta h_\tau, g_\tau)
+    = - \frac{\Delta h_\tau \cdot g_\tau}{\|\Delta h_\tau\|\;\|g_\tau\| + \epsilon}
+  $$
+
+The total loss is then:
+$$
+\mathcal{L} = \mathcal{L}_{\text{task}} + \lambda_{\text{feudal}} \cdot \mathcal{L}_{\text{feudal}},
+$$
+where $\mathcal{L}_{\text{task}}$ is the usual cross-entropy / puzzle loss, and $\lambda_{\text{feudal}}$ is a small weight that keeps the subgoal supervision gentle rather than dominating training.
+
+---
+
+## Does the math of HRM and Feudal Networks clash?
+
+Mathematically, the two ideas **fit together cleanly**:
+
+- HRM already defines a two-time-scale recurrent computation with a manager and a worker.
+- Feudal Networks contribute a **particular way to parameterize and train** the interaction: a subgoal vector in latent space, plus an alignment loss on the resulting state change.
+
+In my setup, the manager’s forward pass is unchanged except for an extra head that emits $g_\tau$. The worker’s forward pass is unchanged except for being conditioned on this extra vector. The gradient flows from:
+
+1. the main task loss into both manager and worker (as in vanilla HRM), and  
+2. the feudal loss into both the subgoal head and the worker states.
+
+There is no hard constraint that forces the model into an inconsistent geometry; we are simply **adding an extra, differentiable regularizer** that nudges the system toward a decomposition where:
+
+- the manager chooses directions $g_\tau$, and  
+- the worker is encouraged to realize those directions in its dynamics.
+
+The only “tension” is practical, not mathematical: if $\lambda_{\text{feudal}}$ is too large, the model may over-optimize for making its state changes align with $g_\tau$ even when that’s not optimal for the task. In practice I keep this weight small and treat feudal supervision as a **soft prior on coordination**, not as a hard constraint.
+
+---
+
+## How feudal subgoals improve HRM (intuitively)
+
+The motivation for adding feudal subgoals is to give the manager a **more structured role** than just “being another context vector”:
+
+1. **Better credit assignment for the manager**  
+   In vanilla HRM, the manager’s influence on performance is often several steps away: it sets a state, the worker runs for a while, and only then do we see whether the puzzle was solved. With feudal subgoals, each manager update gets an immediate, dense signal: *did the worker’s latent trajectory move roughly in the direction I asked for?* This gives the manager a local objective that aligns with its global role.
+
+2. **Commitment windows for the worker**  
+   Over each $K$-step window, the worker is asked to “move in direction $g_\tau$”. This acts like a **soft plan**: instead of re-deciding from scratch at every step, the worker is biased toward a consistent direction of computation for a short horizon. That helps avoid oscillatory or myopic behavior, especially on puzzles requiring multi-step transformations.
+
+3. **Implicit decomposition of the space**  
+   The alignment loss encourages the model to organize its latent space so that meaningful “moves” in reasoning correspond to reasonably well-behaved directions. Over time, the manager can learn to reuse similar subgoals across different instances (“grow this pattern,” “swap these two regions,” “focus on the top-left sub-grid”), which is closer to how we think about reusable mental operations.
+
+4. **Bridging RL-style planning and supervised reasoning**  
+   Feudal Nets were originally defined in RL, where subgoals are about moving an agent in physical or abstract state space. Here, the “state” is a high-dimensional representation of a puzzle and partial computation. By importing the same idea into a supervised HRM, we get a small, principled step toward **latent planning** inside a reasoning model.
+
+---
+
+## Results from experiments
+
+I’ve been testing this Subgoal-Augmented HRM on small, ARC-mini–style grid puzzles with a supervised learning setup (predicting target grids from input grids). Some early, but consistent, observations:
+
+- **Setup**
+  - **Baseline:** vanilla HRM with a two-level recurrent architecture (manager + worker), no feudal loss.
+  - **Subgoal model:** same architecture, plus subgoal head and feudal loss as described above.
+  - **Manager period $K$:** swept over small values (e.g., 3–6).
+  - **Feudal loss weight $\lambda_{\text{feudal}}$:** swept over small values (e.g., around 0.05).
+
+- **Training dynamics**
+  - For reasonable hyperparameters (e.g., $K \in \{3,4\}$, $\lambda_{\text{feudal}} \approx 0.05$), the subgoal model:
+    - converges more smoothly (less noisy validation loss),
+    - avoids some degenerate modes where the manager’s state stops changing meaningfully.
+
+- **Quantitative improvements**
+  - At comparable training steps, the subgoal-augmented HRM shows roughly:
+    - **5–6% lower task / language-model loss** than the baseline HRM, and  
+    - **≈8 percentage-point higher accuracy** on held-out ARC-mini puzzles.
+  - These numbers vary across seeds and exact configs, but the direction of improvement is stable.
+
+- **Qualitative behavior**
+  - Inspecting hidden trajectories suggests that subgoals are not random: similar puzzle types tend to induce similar subgoal directions.
+  - Changing the manager period changes the “granularity” of these moves: shorter periods produce finer-grained, more reactive subgoals; longer periods seem to encourage coarser, more global shifts.
+
+Overall, the experiments support the initial intuition: **adding feudal-style subgoals on top of HRM does not break the math; instead, it gives the model a more structured way to coordinate its two levels.** The gains so far are modest but consistent, and the more interesting part is conceptual—this looks like a viable path toward small, tool-ready “cognitive cores” that can be slotted into larger systems and asked to handle the hard parts of multi-step reasoning.
+

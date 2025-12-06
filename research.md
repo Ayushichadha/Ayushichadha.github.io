@@ -22,6 +22,6 @@ In my work, I extend HRM with a **feudal-style subgoal head**:
 Early experiments on ARC-like grid puzzles show that a **small amount of subgoal supervision** improves both loss and accuracy compared to the vanilla HRM baseline, suggesting better coordination between high- and low-level reasoning.
 
 👉 **[Full blog post with details and preliminary results »](/2025/11/28/subgoal-augmented-hrm/)**  
-👉 Code: *(link to your repo when you’re ready)*
+👉 Code: https://github.com/Ayushichadha/scout
 
 I see this as a step toward compact “cognitive cores” — small models focused on the **algorithms of reasoning**, which can later be plugged into larger systems or tools.
