@@ -1,12 +1,10 @@
-// Animated Neural Network Background
-class NeuralNetwork {
+// Floating Background Imagery - Subtle and Refined
+class FloatingBackground {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.nodes = [];
-    this.connections = [];
-    this.nodeCount = 50;
-    this.connectionDistance = 150;
+    this.shapes = [];
+    this.shapeCount = 15;
     this.animationId = null;
     
     this.resize();
@@ -22,125 +20,93 @@ class NeuralNetwork {
   }
   
   init() {
-    this.nodes = [];
-    this.connections = [];
+    this.shapes = [];
     
-    // Create nodes
-    for (let i = 0; i < this.nodeCount; i++) {
-      this.nodes.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1,
-        pulse: Math.random() * Math.PI * 2
+    // Create floating geometric shapes
+    for (let i = 0; i < this.shapeCount; i++) {
+      const size = Math.random() * 200 + 100;
+      const x = Math.random() * this.canvas.width;
+      const y = Math.random() * this.canvas.height;
+      
+      this.shapes.push({
+        x: x,
+        y: y,
+        size: size,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.002,
+        vx: (Math.random() - 0.5) * 0.1,
+        vy: (Math.random() - 0.5) * 0.1,
+        opacity: Math.random() * 0.15 + 0.05,
+        type: Math.floor(Math.random() * 3), // 0: circle, 1: square, 2: triangle
+        floatPhase: Math.random() * Math.PI * 2,
+        floatAmplitude: Math.random() * 20 + 10
       });
-    }
-    
-    // Create connections
-    for (let i = 0; i < this.nodes.length; i++) {
-      for (let j = i + 1; j < this.nodes.length; j++) {
-        const dx = this.nodes[i].x - this.nodes[j].x;
-        const dy = this.nodes[i].y - this.nodes[j].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < this.connectionDistance) {
-          this.connections.push({
-            node1: i,
-            node2: j,
-            distance: distance,
-            opacity: 1 - distance / this.connectionDistance
-          });
-        }
-      }
     }
   }
   
   update() {
-    // Update node positions
-    this.nodes.forEach(node => {
-      node.x += node.vx;
-      node.y += node.vy;
-      node.pulse += 0.02;
+    this.shapes.forEach(shape => {
+      // Update position with floating motion
+      shape.floatPhase += 0.01;
+      shape.x += shape.vx + Math.sin(shape.floatPhase) * 0.1;
+      shape.y += shape.vy + Math.cos(shape.floatPhase) * 0.1;
+      shape.rotation += shape.rotationSpeed;
       
-      // Bounce off edges
-      if (node.x < 0 || node.x > this.canvas.width) node.vx *= -1;
-      if (node.y < 0 || node.y > this.canvas.height) node.vy *= -1;
-      
-      // Keep in bounds
-      node.x = Math.max(0, Math.min(this.canvas.width, node.x));
-      node.y = Math.max(0, Math.min(this.canvas.height, node.y));
+      // Wrap around edges
+      if (shape.x < -shape.size) shape.x = this.canvas.width + shape.size;
+      if (shape.x > this.canvas.width + shape.size) shape.x = -shape.size;
+      if (shape.y < -shape.size) shape.y = this.canvas.height + shape.size;
+      if (shape.y > this.canvas.height + shape.size) shape.y = -shape.size;
     });
+  }
+  
+  drawShape(shape) {
+    this.ctx.save();
+    this.ctx.translate(shape.x, shape.y);
+    this.ctx.rotate(shape.rotation);
+    this.ctx.globalAlpha = shape.opacity;
+    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    this.ctx.lineWidth = 1;
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
     
-    // Recalculate connections
-    this.connections = [];
-    for (let i = 0; i < this.nodes.length; i++) {
-      for (let j = i + 1; j < this.nodes.length; j++) {
-        const dx = this.nodes[i].x - this.nodes[j].x;
-        const dy = this.nodes[i].y - this.nodes[j].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    const halfSize = shape.size / 2;
+    
+    switch(shape.type) {
+      case 0: // Circle
+        this.ctx.beginPath();
+        this.ctx.arc(0, 0, halfSize, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.stroke();
+        break;
         
-        if (distance < this.connectionDistance) {
-          this.connections.push({
-            node1: i,
-            node2: j,
-            distance: distance,
-            opacity: 1 - distance / this.connectionDistance
-          });
-        }
-      }
+      case 1: // Square
+        this.ctx.beginPath();
+        this.ctx.rect(-halfSize, -halfSize, shape.size, shape.size);
+        this.ctx.fill();
+        this.ctx.stroke();
+        break;
+        
+      case 2: // Triangle
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, -halfSize);
+        this.ctx.lineTo(-halfSize * 0.866, halfSize * 0.5);
+        this.ctx.lineTo(halfSize * 0.866, halfSize * 0.5);
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.stroke();
+        break;
     }
+    
+    this.ctx.restore();
   }
   
   draw() {
-    // Clear with slight fade for trail effect
-    this.ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
+    // Clear with very subtle fade for trailing effect
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    // Draw connections
-    this.connections.forEach(conn => {
-      const node1 = this.nodes[conn.node1];
-      const node2 = this.nodes[conn.node2];
-      
-      const gradient = this.ctx.createLinearGradient(
-        node1.x, node1.y, node2.x, node2.y
-      );
-      gradient.addColorStop(0, `rgba(100, 200, 255, ${conn.opacity * 0.3})`);
-      gradient.addColorStop(1, `rgba(150, 100, 255, ${conn.opacity * 0.3})`);
-      
-      this.ctx.strokeStyle = gradient;
-      this.ctx.lineWidth = 0.5;
-      this.ctx.beginPath();
-      this.ctx.moveTo(node1.x, node1.y);
-      this.ctx.lineTo(node2.x, node2.y);
-      this.ctx.stroke();
-    });
-    
-    // Draw nodes
-    this.nodes.forEach(node => {
-      const pulseSize = Math.sin(node.pulse) * 0.5 + 1;
-      const radius = node.radius * pulseSize;
-      
-      // Outer glow
-      const gradient = this.ctx.createRadialGradient(
-        node.x, node.y, 0,
-        node.x, node.y, radius * 3
-      );
-      gradient.addColorStop(0, 'rgba(100, 200, 255, 0.8)');
-      gradient.addColorStop(0.5, 'rgba(150, 100, 255, 0.4)');
-      gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
-      
-      this.ctx.fillStyle = gradient;
-      this.ctx.beginPath();
-      this.ctx.arc(node.x, node.y, radius * 3, 0, Math.PI * 2);
-      this.ctx.fill();
-      
-      // Core node
-      this.ctx.fillStyle = 'rgba(150, 200, 255, 0.9)';
-      this.ctx.beginPath();
-      this.ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-      this.ctx.fill();
-    });
+    // Draw all shapes
+    this.shapes.forEach(shape => this.drawShape(shape));
   }
   
   animate() {
@@ -160,7 +126,6 @@ class NeuralNetwork {
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('neural-network-canvas');
   if (canvas) {
-    window.neuralNetwork = new NeuralNetwork(canvas);
+    window.floatingBackground = new FloatingBackground(canvas);
   }
 });
-

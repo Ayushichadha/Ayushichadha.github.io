@@ -1,17 +1,20 @@
 ---
 ---
 
-// Modern Futuristic Theme
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// Refined Color Palette - Subtle and Sophisticated
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #111118;
-  --text-primary: #e0e0e8;
-  --text-secondary: #a0a0b0;
-  --accent-primary: #64c8ff;
-  --accent-secondary: #9664ff;
-  --accent-tertiary: #ff64c8;
-  --border-color: rgba(100, 200, 255, 0.2);
-  --glow-color: rgba(100, 200, 255, 0.4);
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-overlay: rgba(10, 10, 10, 0.7);
+  --text-primary: #f5f5f5;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --accent-primary: #ffffff;
+  --accent-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glow-subtle: rgba(255, 255, 255, 0.03);
 }
 
 * {
@@ -20,17 +23,25 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
-  position: relative;
+html {
+  scroll-behavior: smooth;
 }
 
-// Neural Network Canvas Background
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Floating Background Canvas
 #neural-network-canvas {
   position: fixed;
   top: 0;
@@ -39,30 +50,33 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
-// Content wrapper
+// Content wrapper with subtle overlay
 .site-wrapper {
   position: relative;
   z-index: 1;
   min-height: 100vh;
   background: linear-gradient(
     180deg,
-    rgba(10, 10, 15, 0.8) 0%,
-    rgba(10, 10, 15, 0.95) 100%
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.9) 100%
   );
 }
 
-// Header/Navigation
+// Header - Minimal and Subtle
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border-color);
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 2rem;
+  transition: all 0.3s ease;
   
   .wrapper {
     max-width: 1200px;
@@ -73,46 +87,45 @@ body {
   }
   
   .site-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.125rem;
+    font-weight: 500;
     color: var(--text-primary);
     text-decoration: none;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
-    transition: all 0.3s ease;
+    letter-spacing: -0.02em;
+    transition: opacity 0.3s ease;
     
     &:hover {
-      filter: brightness(1.2);
+      opacity: 0.7;
     }
   }
   
   nav {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     
     a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      letter-spacing: -0.01em;
+      transition: color 0.3s ease;
       position: relative;
       
       &:hover {
-        color: var(--accent-primary);
+        color: var(--text-primary);
       }
       
       &::after {
         content: '';
         position: absolute;
-        bottom: -5px;
+        bottom: -8px;
         left: 0;
         width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        height: 1px;
+        background: var(--text-primary);
         transition: width 0.3s ease;
+        opacity: 0.5;
       }
       
       &:hover::after {
@@ -122,118 +135,125 @@ body {
   }
 }
 
-// Main content
+// Main content area
 .site-main {
-  max-width: 900px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 6rem 2rem 8rem;
 }
 
-// Home page hero
+// Hero section - Subtle and Refined
 .hero {
-  text-align: center;
-  padding: 6rem 0;
-  margin-bottom: 4rem;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 6rem;
   
   h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-size: 3rem;
+    font-weight: 300;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     line-height: 1.2;
-    letter-spacing: -1px;
+    letter-spacing: -0.03em;
   }
   
   .tagline {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 300;
     color: var(--text-secondary);
     margin-bottom: 2rem;
-    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
   
   .description {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.8;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
   }
 }
 
-// Post/Page content
+// Post and Page content - Minimal styling
 .post-content, .page-content {
-  background: rgba(17, 17, 24, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 3rem;
-  margin: 2rem 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
   
   h1 {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 300;
     margin-bottom: 2rem;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
   }
   
   h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-top: 3rem;
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-top: 4rem;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
-    position: relative;
-    padding-left: 1rem;
-    border-left: 3px solid var(--accent-primary);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    padding-left: 0;
+    border-left: none;
   }
   
   h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 2rem;
+    font-size: 1.375rem;
+    font-weight: 500;
+    margin-top: 3rem;
     margin-bottom: 1rem;
-    color: var(--accent-primary);
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
   
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
     color: var(--text-secondary);
-    line-height: 1.8;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    font-size: 1rem;
   }
   
   ul, ol {
     margin-bottom: 2rem;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     
     li {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.875rem;
       color: var(--text-secondary);
-      line-height: 1.8;
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      
+      &::marker {
+        color: var(--text-muted);
+      }
     }
   }
   
   code {
-    background: rgba(100, 200, 255, 0.1);
-    color: var(--accent-primary);
-    padding: 0.2em 0.5em;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
     font-size: 0.9em;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-family: 'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-weight: 400;
     border: 1px solid var(--border-color);
   }
   
   pre {
-    background: #1a1a24;
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 1.5rem;
     overflow-x: auto;
     margin: 2rem 0;
@@ -243,73 +263,66 @@ body {
       border: none;
       padding: 0;
       color: var(--text-primary);
+      font-size: 0.875rem;
+      line-height: 1.6;
     }
   }
   
   blockquote {
-    border-left: 4px solid var(--accent-secondary);
+    border-left: 2px solid var(--border-color);
     padding-left: 1.5rem;
     margin: 2rem 0;
-    color: var(--text-secondary);
-    font-style: italic;
-    background: rgba(150, 100, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 4px;
+    color: var(--text-muted);
+    font-style: normal;
+    background: transparent;
   }
   
   hr {
     border: none;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--accent-primary),
-      transparent
-    );
-    margin: 3rem 0;
+    background: var(--border-color);
+    margin: 4rem 0;
   }
   
   strong {
     color: var(--text-primary);
-    font-weight: 600;
+    font-weight: 500;
   }
   
   a {
-    color: var(--accent-primary);
-    text-decoration: none;
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--text-muted);
+    text-underline-offset: 3px;
     transition: all 0.3s ease;
     
     &:hover {
-      color: var(--accent-secondary);
-      text-shadow: 0 0 8px var(--glow-color);
+      text-decoration-color: var(--text-primary);
+      opacity: 0.8;
     }
   }
-}
-
-// Table of Contents
-.toc-container {
-  background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(150, 100, 255, 0.1));
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 3rem 0;
-  backdrop-filter: blur(10px);
   
-  ul {
+  // Table of Contents - Subtle
+  > h2:first-of-type + ul,
+  > ul:first-of-type {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 3rem 0;
     list-style: none;
-    padding-left: 0;
     
     li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       
       a {
-        color: var(--text-primary);
-        transition: all 0.3s ease;
-        display: inline-block;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.9375rem;
+        transition: color 0.3s ease;
         
         &:hover {
-          color: var(--accent-primary);
-          transform: translateX(5px);
+          color: var(--text-primary);
         }
       }
     }
@@ -321,40 +334,61 @@ body {
   color: var(--text-primary) !important;
 }
 
-// Footer
+// Footer - Minimal
 .site-footer {
   text-align: center;
-  padding: 3rem 2rem;
-  color: var(--text-secondary);
+  padding: 4rem 2rem;
+  color: var(--text-muted);
   border-top: 1px solid var(--border-color);
-  margin-top: 4rem;
-}
-
-// Responsive
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
+  margin-top: 6rem;
+  font-size: 0.875rem;
   
-  .post-content, .page-content {
-    padding: 2rem 1.5rem;
-  }
-  
-  .site-header {
-    padding: 1rem;
+  a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
     
-    nav {
-      gap: 1rem;
-      font-size: 0.9rem;
+    &:hover {
+      color: var(--text-primary);
     }
   }
 }
 
-// Scroll animations
+// Responsive Design
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+  
+  .post-content, .page-content {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .site-header {
+    padding: 1rem 1.5rem;
+    
+    nav {
+      gap: 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
+  
+  .site-main {
+    padding: 4rem 1.5rem 6rem;
+  }
+}
+
+// Subtle fade-in animation
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -363,6 +397,13 @@ body {
 }
 
 .fade-in {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.8s ease-out;
 }
 
+// Post metadata
+.post-content header p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 3rem;
+  letter-spacing: 0;
+}
