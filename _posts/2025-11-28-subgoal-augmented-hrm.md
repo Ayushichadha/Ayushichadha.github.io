@@ -6,7 +6,7 @@ permalink: /research/
 
 ## Contents
 
-- [Introduction](#introduction)
+- [Introduction: cognitive core reasoning](#introduction)
 - [Algorithm and Architecture](#algorithm-and-architecture)
   - [Feudal subgoal head](#feudal-subgoal-head)
   - [Feudal loss](#feudal-loss)
@@ -16,11 +16,26 @@ permalink: /research/
 
 ---
 
-## Introduction
+## Cognitive Core Reasoning
 
-Most current work on “reasoning” in language models still looks like **better prompting for the same flat transformer**: we ask the model to write longer chain-of-thoughts, or to self-reflect, but the computation graph underneath is unchanged. The **Hierarchical Reasoning Model (HRM)** takes a different route. Instead of stretching a single stream of tokens, it separates reasoning into two coupled time-scales: a **slow, high-level module** that updates infrequently and decides *where* to push the computation, and a **fast, low-level module** that does the token-by-token work.
-
-My project asks a concrete question inside this paradigm: *if we treat the high-level module as a “manager”, can we train it to emit explicit **directional subgoals** in latent space, and does that actually help the worker reason better?* Inspired by Feudal Networks in hierarchical RL, I add a small **feudal subgoal head** on top of HRM’s manager and train it with an auxiliary “alignment” loss. The goal is not to make the model memorize more facts, but to make it **better at planning and coordinating multi-step computation**—a small step toward the kind of compact “cognitive core” I eventually want: a model whose primary skill is to think, not to store the world.
+Modern large-scale language models conflate two logically distinct components: (1) a vast statistical memory of the world, and (2) a computational substrate that carries out inference, abstraction, and control.
+The notion of a cognitive core starts from the hypothesis that these can be separated. Instead of a single model that simultaneously memorises most of the internet and performs all computation, we can imagine a compact network whose parameters are devoted almost entirely to procedural competence: algorithms for multi-step inference, search over latent states, hierarchical control, and credit assignment. Factual and episodic knowledge can then be offloaded to external memory, retrieval systems, or larger frozen language models.
+In this view, a cognitive core is a relatively small model that is optimised not to encode encyclopaedic knowledge, but to implement and coordinate complex computations. Its role is to:
+* maintain and update internal state over extended time horizons,
+* decompose goals into subgoals and allocate computation across scales,
+* decide what to query from external memory or tools and when, and
+* integrate the results of those interactions into a coherent plan.
+The emphasis is on orchestration of computation rather than storage of facts: the core should know how to think, search, and plan given access to tools and memory, rather than knowing everything in advance.
+This work studies one concrete step in that direction. We consider a Hierarchical Reasoning Model (HRM) augmented with feudal-style subgoal mechanisms as a candidate architecture for a cognitive core. HRMs already instantiate several properties that are desirable for such a kernel:
+* they are small (tens of millions of parameters rather than billions),
+* they perform deep latent-space reasoning via recurrent dynamics instead of long chain-of-thought traces, and
+* their design is explicitly neuroscience-inspired, with separate fast and slow modules that reflect temporal separation and hierarchical processing in cortical circuits.
+However, a generic hierarchical recurrent system is not yet enough. To move closer to a cognitive core, we argue that explicit subgoal planning is essential. Human and animal behaviour is structured by intermediate objectives: long-horizon tasks are decomposed into segments, and internal representations evolve under constraints imposed by these subgoals. Analogously, a core reasoning module should not simply run an undifferentiated deep computation; it should be able to propose, revise, and enforce subgoals over its own latent trajectory.
+To capture this, we introduce a Subgoal-Augmented Hierarchical Reasoning Model that blends HRM with ideas from Feudal Networks. A slow “manager” pathway periodically emits directional subgoals in the shared latent space; a fast “worker” pathway is trained, via a feudal-style intrinsic objective, to evolve its hidden state in accordance with these directions over short temporal windows. The resulting system retains HRM’s compact, brain-inspired hierarchy, but adds an explicit mechanism for hierarchical subgoal planning in latent space.
+Our exploration is therefore not only about HRM in isolation, nor about feudal subgoals in isolation, but about their interaction:
+* HRM provides a small, temporally-structured, recurrent backbone that behaves like a minimal reasoning engine.
+* Feudal-style subgoals provide the planning structure that carves long internal computations into goal-directed segments.
+Together, they shift the design compass toward a cognitive core: a model that devotes its limited parameters to organising computation—via hierarchy, temporal separation, and subgoal planning—rather than to storing large volumes of static knowledge.
 
 ---
 
