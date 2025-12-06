@@ -16,16 +16,15 @@ class FloatingNeuralNetworks {
     this.init();
     this.animate();
     
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', () => {
+      this.resize();
+      this.init(); // Reinitialize on resize
+    });
   }
   
   resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    // Reinitialize networks after resize
-    if (this.networks.length === 0) {
-      this.init();
-    }
   }
   
   init() {
@@ -79,7 +78,7 @@ class FloatingNeuralNetworks {
       
       // Wrap around edges
       const networkWidth = network.layers * network.layerSpacing * network.scale;
-      const networkHeight = Math.max(...network.nodesPerLayer) * 30 * network.scale;
+      const networkHeight = Math.max(...network.nodesPerLayer) * 35 * network.scale;
       
       if (network.x < -networkWidth) network.x = this.canvas.width + networkWidth;
       if (network.x > this.canvas.width + networkWidth) network.x = -networkWidth;
@@ -96,12 +95,11 @@ class FloatingNeuralNetworks {
     
     // Calculate network dimensions
     const layerSpacing = network.layerSpacing;
-    const maxNodes = Math.max(...network.nodesPerLayer);
     const nodeVerticalSpacing = 35;
     
     // Draw connections first (behind nodes) - more visible
-    this.ctx.globalAlpha = network.opacity * 0.5;
-    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    this.ctx.globalAlpha = network.opacity * 0.6;
+    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
     this.ctx.lineWidth = 1;
     
     for (let layerIdx = 0; layerIdx < network.layers - 1; layerIdx++) {
@@ -141,21 +139,21 @@ class FloatingNeuralNetworks {
         // Outer glow - more visible
         const gradient = this.ctx.createRadialGradient(
           layerX, nodeY, 0,
-          layerX, nodeY, radius * 5
+          layerX, nodeY, radius * 6
         );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${network.opacity * 0.6})`);
-        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${network.opacity * 0.2})`);
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${network.opacity * 0.8})`);
+        gradient.addColorStop(0.4, `rgba(255, 255, 255, ${network.opacity * 0.3})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         
         this.ctx.globalAlpha = network.opacity;
         this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
-        this.ctx.arc(layerX, nodeY, radius * 5, 0, Math.PI * 2);
+        this.ctx.arc(layerX, nodeY, radius * 6, 0, Math.PI * 2);
         this.ctx.fill();
         
         // Core node - brighter
-        this.ctx.globalAlpha = network.opacity * 2;
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.globalAlpha = Math.min(network.opacity * 2.5, 1);
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         this.ctx.beginPath();
         this.ctx.arc(layerX, nodeY, radius, 0, Math.PI * 2);
         this.ctx.fill();
@@ -193,11 +191,37 @@ document.addEventListener('DOMContentLoaded', () => {
   if (canvas) {
     try {
       window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
-      console.log('Neural networks initialized');
+      console.log('Neural networks initialized successfully');
     } catch (error) {
       console.error('Error initializing neural networks:', error);
     }
   } else {
-    console.error('Canvas element not found');
+    console.error('Canvas element with id "neural-network-canvas" not found');
   }
 });
+
+// Also try initializing after a short delay in case DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('neural-network-canvas');
+    if (canvas && !window.floatingNeuralNetworks) {
+      try {
+        window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
+        console.log('Neural networks initialized (delayed)');
+      } catch (error) {
+        console.error('Error initializing neural networks (delayed):', error);
+      }
+    }
+  });
+} else {
+  // DOM already loaded
+  const canvas = document.getElementById('neural-network-canvas');
+  if (canvas && !window.floatingNeuralNetworks) {
+    try {
+      window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
+      console.log('Neural networks initialized (immediate)');
+    } catch (error) {
+      console.error('Error initializing neural networks (immediate):', error);
+    }
+  }
+}
