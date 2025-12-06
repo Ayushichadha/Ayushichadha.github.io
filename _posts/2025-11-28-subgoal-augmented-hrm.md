@@ -16,7 +16,7 @@ permalink: /research/
 
 ---
 
-## Cognitive Core Reasoning {#introduction}
+## Cognitive Core Reasoning
 
 Modern large-scale language models conflate two logically distinct components: (1) a vast statistical memory of the world, and (2) a computational substrate that carries out inference, abstraction, and control.
 The notion of a cognitive core starts from the hypothesis that these can be separated. Instead of a single model that simultaneously memorises most of the internet and performs all computation, we can imagine a compact network whose parameters are devoted almost entirely to procedural competence: algorithms for multi-step inference, search over latent states, hierarchical control, and credit assignment. Factual and episodic knowledge can then be offloaded to external memory, retrieval systems, or larger frozen language models.
