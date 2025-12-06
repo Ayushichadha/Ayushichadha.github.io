@@ -1,10 +1,10 @@
-// Floating Background Imagery - Subtle and Refined
-class FloatingBackground {
+// Floating Neural Network Structures - Multiple Networks Floating
+class FloatingNeuralNetworks {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.shapes = [];
-    this.shapeCount = 15;
+    this.networks = [];
+    this.networkCount = 8;
     this.animationId = null;
     
     this.resize();
@@ -20,81 +20,143 @@ class FloatingBackground {
   }
   
   init() {
-    this.shapes = [];
+    this.networks = [];
     
-    // Create floating geometric shapes
-    for (let i = 0; i < this.shapeCount; i++) {
-      const size = Math.random() * 200 + 100;
-      const x = Math.random() * this.canvas.width;
-      const y = Math.random() * this.canvas.height;
+    // Create multiple neural network structures
+    for (let i = 0; i < this.networkCount; i++) {
+      const layers = Math.floor(Math.random() * 3) + 3; // 3-5 layers
+      const nodesPerLayer = [];
       
-      this.shapes.push({
-        x: x,
-        y: y,
-        size: size,
+      // Generate nodes per layer (tapered structure)
+      for (let j = 0; j < layers; j++) {
+        const progress = j / (layers - 1);
+        const minNodes = 3;
+        const maxNodes = 8;
+        const nodes = Math.floor(minNodes + (maxNodes - minNodes) * (1 - progress * 0.5));
+        nodesPerLayer.push(nodes);
+      }
+      
+      this.networks.push({
+        x: Math.random() * this.canvas.width,
+        y: Math.random() * this.canvas.height,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.002,
-        vx: (Math.random() - 0.5) * 0.1,
-        vy: (Math.random() - 0.5) * 0.1,
-        opacity: Math.random() * 0.15 + 0.05,
-        type: Math.floor(Math.random() * 3), // 0: circle, 1: square, 2: triangle
+        rotationSpeed: (Math.random() - 0.5) * 0.001,
+        scale: Math.random() * 0.4 + 0.3, // 0.3 to 0.7 scale
+        layers: layers,
+        nodesPerLayer: nodesPerLayer,
+        layerSpacing: 80,
+        nodeRadius: 3,
+        opacity: Math.random() * 0.2 + 0.1, // 0.1 to 0.3
         floatPhase: Math.random() * Math.PI * 2,
-        floatAmplitude: Math.random() * 20 + 10
+        floatAmplitude: Math.random() * 15 + 10,
+        pulsePhase: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.02 + 0.01
       });
     }
   }
   
   update() {
-    this.shapes.forEach(shape => {
-      // Update position with floating motion
-      shape.floatPhase += 0.01;
-      shape.x += shape.vx + Math.sin(shape.floatPhase) * 0.1;
-      shape.y += shape.vy + Math.cos(shape.floatPhase) * 0.1;
-      shape.rotation += shape.rotationSpeed;
+    this.networks.forEach(network => {
+      // Update floating motion
+      network.floatPhase += 0.008;
+      network.pulsePhase += network.pulseSpeed;
+      network.rotation += network.rotationSpeed;
+      
+      // Smooth floating movement
+      network.x += network.vx + Math.sin(network.floatPhase) * 0.05;
+      network.y += network.vy + Math.cos(network.floatPhase * 0.7) * 0.05;
       
       // Wrap around edges
-      if (shape.x < -shape.size) shape.x = this.canvas.width + shape.size;
-      if (shape.x > this.canvas.width + shape.size) shape.x = -shape.size;
-      if (shape.y < -shape.size) shape.y = this.canvas.height + shape.size;
-      if (shape.y > this.canvas.height + shape.size) shape.y = -shape.size;
+      const networkWidth = network.layers * network.layerSpacing * network.scale;
+      const networkHeight = Math.max(...network.nodesPerLayer) * 30 * network.scale;
+      
+      if (network.x < -networkWidth) network.x = this.canvas.width + networkWidth;
+      if (network.x > this.canvas.width + networkWidth) network.x = -networkWidth;
+      if (network.y < -networkHeight) network.y = this.canvas.height + networkHeight;
+      if (network.y > this.canvas.height + networkHeight) network.y = -networkHeight;
     });
   }
   
-  drawShape(shape) {
+  drawNetwork(network) {
     this.ctx.save();
-    this.ctx.translate(shape.x, shape.y);
-    this.ctx.rotate(shape.rotation);
-    this.ctx.globalAlpha = shape.opacity;
+    this.ctx.translate(network.x, network.y);
+    this.ctx.rotate(network.rotation);
+    this.ctx.scale(network.scale, network.scale);
+    
+    // Calculate network dimensions
+    const layerSpacing = network.layerSpacing;
+    const maxNodes = Math.max(...network.nodesPerLayer);
+    const nodeVerticalSpacing = 30;
+    
+    // Store node positions for connections
+    const nodePositions = [];
+    
+    // Draw connections first (behind nodes)
+    this.ctx.globalAlpha = network.opacity * 0.3;
     this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-    this.ctx.lineWidth = 1;
-    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+    this.ctx.lineWidth = 0.5;
     
-    const halfSize = shape.size / 2;
+    for (let layerIdx = 0; layerIdx < network.layers - 1; layerIdx++) {
+      const currentLayerNodes = network.nodesPerLayer[layerIdx];
+      const nextLayerNodes = network.nodesPerLayer[layerIdx + 1];
+      
+      const currentLayerX = layerIdx * layerSpacing;
+      const nextLayerX = (layerIdx + 1) * layerSpacing;
+      
+      // Draw connections between layers
+      for (let i = 0; i < currentLayerNodes; i++) {
+        const currentY = (i - (currentLayerNodes - 1) / 2) * nodeVerticalSpacing;
+        
+        for (let j = 0; j < nextLayerNodes; j++) {
+          const nextY = (j - (nextLayerNodes - 1) / 2) * nodeVerticalSpacing;
+          
+          // Draw connection with slight fade
+          this.ctx.beginPath();
+          this.ctx.moveTo(currentLayerX, currentY);
+          this.ctx.lineTo(nextLayerX, nextY);
+          this.ctx.stroke();
+        }
+      }
+    }
     
-    switch(shape.type) {
-      case 0: // Circle
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, halfSize, 0, Math.PI * 2);
-        this.ctx.fill();
-        this.ctx.stroke();
-        break;
+    // Draw nodes
+    const pulse = Math.sin(network.pulsePhase) * 0.2 + 1; // 0.8 to 1.2
+    
+    for (let layerIdx = 0; layerIdx < network.layers; layerIdx++) {
+      const nodesInLayer = network.nodesPerLayer[layerIdx];
+      const layerX = layerIdx * layerSpacing;
+      
+      for (let nodeIdx = 0; nodeIdx < nodesInLayer; nodeIdx++) {
+        const nodeY = (nodeIdx - (nodesInLayer - 1) / 2) * nodeVerticalSpacing;
+        const radius = network.nodeRadius * pulse;
         
-      case 1: // Square
-        this.ctx.beginPath();
-        this.ctx.rect(-halfSize, -halfSize, shape.size, shape.size);
-        this.ctx.fill();
-        this.ctx.stroke();
-        break;
+        // Outer glow
+        const gradient = this.ctx.createRadialGradient(
+          layerX, nodeY, 0,
+          layerX, nodeY, radius * 4
+        );
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${network.opacity * 0.4})`);
+        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${network.opacity * 0.1})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         
-      case 2: // Triangle
+        this.ctx.globalAlpha = network.opacity;
+        this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
-        this.ctx.moveTo(0, -halfSize);
-        this.ctx.lineTo(-halfSize * 0.866, halfSize * 0.5);
-        this.ctx.lineTo(halfSize * 0.866, halfSize * 0.5);
-        this.ctx.closePath();
+        this.ctx.arc(layerX, nodeY, radius * 4, 0, Math.PI * 2);
         this.ctx.fill();
-        this.ctx.stroke();
-        break;
+        
+        // Core node
+        this.ctx.globalAlpha = network.opacity * 1.5;
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        this.ctx.beginPath();
+        this.ctx.arc(layerX, nodeY, radius, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Store position for potential future use
+        nodePositions.push({ x: layerX, y: nodeY });
+      }
     }
     
     this.ctx.restore();
@@ -102,11 +164,11 @@ class FloatingBackground {
   
   draw() {
     // Clear with very subtle fade for trailing effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    // Draw all shapes
-    this.shapes.forEach(shape => this.drawShape(shape));
+    // Draw all networks
+    this.networks.forEach(network => this.drawNetwork(network));
   }
   
   animate() {
@@ -126,6 +188,6 @@ class FloatingBackground {
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('neural-network-canvas');
   if (canvas) {
-    window.floatingBackground = new FloatingBackground(canvas);
+    window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
   }
 });
