@@ -7,6 +7,11 @@ class FloatingNeuralNetworks {
     this.networkCount = 8;
     this.animationId = null;
     
+    if (!this.ctx) {
+      console.error('Could not get 2d context from canvas');
+      return;
+    }
+    
     this.resize();
     this.init();
     this.animate();
@@ -17,6 +22,10 @@ class FloatingNeuralNetworks {
   resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+    // Reinitialize networks after resize
+    if (this.networks.length === 0) {
+      this.init();
+    }
   }
   
   init() {
@@ -43,12 +52,12 @@ class FloatingNeuralNetworks {
         vy: (Math.random() - 0.5) * 0.15,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.001,
-        scale: Math.random() * 0.4 + 0.3, // 0.3 to 0.7 scale
+        scale: Math.random() * 0.5 + 0.5, // 0.5 to 1.0 scale (larger)
         layers: layers,
         nodesPerLayer: nodesPerLayer,
-        layerSpacing: 80,
-        nodeRadius: 3,
-        opacity: Math.random() * 0.2 + 0.1, // 0.1 to 0.3
+        layerSpacing: 100,
+        nodeRadius: 4,
+        opacity: Math.random() * 0.3 + 0.2, // 0.2 to 0.5 (more visible)
         floatPhase: Math.random() * Math.PI * 2,
         floatAmplitude: Math.random() * 15 + 10,
         pulsePhase: Math.random() * Math.PI * 2,
@@ -88,15 +97,12 @@ class FloatingNeuralNetworks {
     // Calculate network dimensions
     const layerSpacing = network.layerSpacing;
     const maxNodes = Math.max(...network.nodesPerLayer);
-    const nodeVerticalSpacing = 30;
+    const nodeVerticalSpacing = 35;
     
-    // Store node positions for connections
-    const nodePositions = [];
-    
-    // Draw connections first (behind nodes)
-    this.ctx.globalAlpha = network.opacity * 0.3;
-    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-    this.ctx.lineWidth = 0.5;
+    // Draw connections first (behind nodes) - more visible
+    this.ctx.globalAlpha = network.opacity * 0.5;
+    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    this.ctx.lineWidth = 1;
     
     for (let layerIdx = 0; layerIdx < network.layers - 1; layerIdx++) {
       const currentLayerNodes = network.nodesPerLayer[layerIdx];
@@ -112,7 +118,7 @@ class FloatingNeuralNetworks {
         for (let j = 0; j < nextLayerNodes; j++) {
           const nextY = (j - (nextLayerNodes - 1) / 2) * nodeVerticalSpacing;
           
-          // Draw connection with slight fade
+          // Draw connection
           this.ctx.beginPath();
           this.ctx.moveTo(currentLayerX, currentY);
           this.ctx.lineTo(nextLayerX, nextY);
@@ -121,7 +127,7 @@ class FloatingNeuralNetworks {
       }
     }
     
-    // Draw nodes
+    // Draw nodes - more visible
     const pulse = Math.sin(network.pulsePhase) * 0.2 + 1; // 0.8 to 1.2
     
     for (let layerIdx = 0; layerIdx < network.layers; layerIdx++) {
@@ -132,30 +138,27 @@ class FloatingNeuralNetworks {
         const nodeY = (nodeIdx - (nodesInLayer - 1) / 2) * nodeVerticalSpacing;
         const radius = network.nodeRadius * pulse;
         
-        // Outer glow
+        // Outer glow - more visible
         const gradient = this.ctx.createRadialGradient(
           layerX, nodeY, 0,
-          layerX, nodeY, radius * 4
+          layerX, nodeY, radius * 5
         );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${network.opacity * 0.4})`);
-        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${network.opacity * 0.1})`);
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${network.opacity * 0.6})`);
+        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${network.opacity * 0.2})`);
         gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         
         this.ctx.globalAlpha = network.opacity;
         this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
-        this.ctx.arc(layerX, nodeY, radius * 4, 0, Math.PI * 2);
+        this.ctx.arc(layerX, nodeY, radius * 5, 0, Math.PI * 2);
         this.ctx.fill();
         
-        // Core node
-        this.ctx.globalAlpha = network.opacity * 1.5;
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        // Core node - brighter
+        this.ctx.globalAlpha = network.opacity * 2;
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
         this.ctx.beginPath();
         this.ctx.arc(layerX, nodeY, radius, 0, Math.PI * 2);
         this.ctx.fill();
-        
-        // Store position for potential future use
-        nodePositions.push({ x: layerX, y: nodeY });
       }
     }
     
@@ -164,7 +167,7 @@ class FloatingNeuralNetworks {
   
   draw() {
     // Clear with very subtle fade for trailing effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
     // Draw all networks
@@ -188,6 +191,13 @@ class FloatingNeuralNetworks {
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('neural-network-canvas');
   if (canvas) {
-    window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
+    try {
+      window.floatingNeuralNetworks = new FloatingNeuralNetworks(canvas);
+      console.log('Neural networks initialized');
+    } catch (error) {
+      console.error('Error initializing neural networks:', error);
+    }
+  } else {
+    console.error('Canvas element not found');
   }
 });
