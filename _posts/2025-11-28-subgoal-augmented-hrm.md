@@ -7,9 +7,13 @@ permalink: /research/
 ## Contents
 
 - [Introduction: cognitive core reasoning](#introduction)
-- [Algorithm and Architecture](#algorithm-and-architecture)
-  - [Feudal subgoal head](#feudal-subgoal-head)
-  - [Feudal loss](#feudal-loss)
+- [Architecture and Algorithm](#architecture-and-algorithm)
+  - [Theoretical Foundation](#1-theoretical-foundation)
+  - [Mathematical Formulation](#2-mathematical-formulation)
+  - [Why Directional Subgoals Help HRM](#3-why-directional-subgoals-help-hrm)
+  - [Architectural Benefits to HRM](#4-architectural-benefits-to-hrm)
+  - [Real-World Use Cases and Applications](#5-real-world-use-cases-and-applications)
+  - [Algorithm Summary](#6-algorithm-summary)
 - [Does the math of HRM and Feudal Networks clash?](#does-the-math-of-hrm-and-feudal-networks-clash)
 - [How feudal subgoals improve HRM (intuitively)](#how-feudal-subgoals-improve-hrm-intuitively)
 - [Results from experiments](#results-from-experiments)
@@ -42,69 +46,349 @@ Together, they shift the design compass toward a cognitive core: a model that de
 
 ---
 
-## Algorithm and Architecture
+## Architecture and Algorithm
 
-At a high level, the baseline HRM can be described in two interacting pieces:
+### 1. Theoretical Foundation
 
-- A **manager (slow module)** with hidden state $m_t$ that updates every $K$ steps.
-- A **worker (fast module)** with hidden state $h_t$ that updates at every token / time-step.
+#### 1.1 Hierarchical Reasoning Model (HRM) Overview
 
-On most steps, only the worker runs:
+The Hierarchical Reasoning Model (HRM) is a recurrent architecture that performs sequential reasoning through two interdependent modules operating at different timescales:
 
-- The worker takes the current token (or grid observation), the previous worker state $h_t$, and a *cached* manager state $m_{\tau}$ from the last manager update, and produces:
-  - the next worker state $h_{t+1}$
-  - the usual language-model or puzzle head outputs (logits, actions, etc.).
+- **High-level module (Manager, H)**: Maintains abstract state \( z_H \in \mathbb{R}^d \) and performs strategic planning at a slower timescale
+- **Low-level module (Worker, L)**: Maintains detailed state \( z_L \in \mathbb{R}^d \) and executes rapid computations at a faster timescale
 
-Every $K$ steps (i.e., when $t$ hits a manager boundary), we:
+The modules interact through alternating updates, where each level conditions on the other's output, creating a hierarchical information flow that enables both abstract planning and detailed execution.
 
-1. Aggregate information from the last $K$ worker steps (e.g., via the final worker state or a pooled summary).
-2. Update the manager state $m_{\tau+1}$.
-3. Broadcast this updated manager context to the worker for the next $K$-step window.
+#### 1.2 The Coordination Problem
 
-### Feudal subgoal head
+While HRM's hierarchical structure enables multi-scale reasoning, the coordination between H and L levels is implicit. The worker must infer the manager's intent from shared representations, which can lead to:
 
-My extension adds a **subgoal head** on top of the manager:
+- **Credit assignment ambiguity**: Difficulty determining which worker actions contribute to high-level objectives
+- **Suboptimal exploration**: Worker may explore directions not aligned with manager's goals
+- **Slow convergence**: Lack of explicit guidance increases the search space
 
-- At each manager update index $\tau$, the manager produces a **subgoal vector**
-  $$
-  g_\tau \in \mathbb{R}^d
-  $$
-  in the same latent space as the worker’s hidden state, or a projection of it.
-- For the next $K$ worker steps $t \in [\tau K, (\tau+1)K)$, the worker is *conditioned* on this subgoal:
-  - either by concatenating $g_\tau$ to its input,
-  - or by using it as an affine modulation / bias inside the worker’s blocks.
+#### 1.3 Feudal Subgoal Mechanism: A Solution
 
-So structurally:
+We address these limitations by integrating a feudal subgoal mechanism inspired by Feudal Networks (FuN). The key insight is to provide **explicit directional guidance** from manager to worker through latent subgoals, combined with an **intrinsic reward signal** that encourages alignment.
 
-1. **Manager forward (every $K$ steps)**  
-   - Input: summary of recent worker states.  
-   - Output: new $m_{\tau+1}$, plus subgoal vector $g_{\tau+1}$.
+### 2. Mathematical Formulation
 
-2. **Worker forward (every step)**  
-   - Input: token / observation, previous $h_t$, current manager state $m_{\tau}$, and subgoal $g_\tau$.  
-   - Output: new $h_{t+1}$, predictions.
+#### 2.1 HRM Base Architecture
 
-### Feudal loss
+At each time step \( t \), HRM processes input \( x_t \) through alternating H and L updates:
 
-To actually *train* the subgoals, I add an auxiliary loss that encourages the worker's change in state over a window to align with the manager's chosen direction. Concretely, for each window:
+**Input Encoding:**
+\[
+\mathbf{e}_t = \text{Embed}(x_t, \text{puzzle\_id})
+\]
 
-- Let $h_{\text{start}}$ and $h_{\text{end}}$ be the worker states at the beginning and end of the window.
-- Define a **direction of progress**:
-  $$
-  \Delta h_\tau = h_{\text{end}} - h_{\text{start}}.
-  $$
-- Encourage $\Delta h_\tau$ to align with $g_\tau$ using a cosine-similarity based term:
-  $$
-  \mathcal{L}_{\text{feudal},\tau}
-    = - \cos(\Delta h_\tau, g_\tau)
-    = - \frac{\Delta h_\tau \cdot g_\tau}{\|\Delta h_\tau\|\;\|g_\tau\| + \epsilon}
-  $$
+**Hierarchical Updates:**
+\[
+\begin{aligned}
+\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t\right) \\
+\mathbf{z}_H^{(t)} &= \text{H\_level}\left(\mathbf{z}_H^{(t-1)}, \mathbf{z}_L^{(t)}\right)
+\end{aligned}
+\]
 
-The total loss is then:
-$$
-\mathcal{L} = \mathcal{L}_{\text{task}} + \lambda_{\text{feudal}} \cdot \mathcal{L}_{\text{feudal}},
-$$
-where $\mathcal{L}_{\text{task}}$ is the usual cross-entropy / puzzle loss, and $\lambda_{\text{feudal}}$ is a small weight that keeps the subgoal supervision gentle rather than dominating training.
+where L_level and H_level are transformer-based reasoning modules with \( L\_cycles \) and \( H\_cycles \) internal iterations respectively.
+
+#### 2.2 Feudal Subgoal Head
+
+The subgoal head transforms the manager's hidden state into a directional goal vector and optional gating signal:
+
+**Goal Generation:**
+\[
+\begin{aligned}
+\mathbf{g}_t &= \text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right) \\
+\sigma_t &= \text{sigmoid}\left(\frac{\mathbf{W}_\sigma \cdot \mathbf{z}_H^{(t)}}{\tau}\right)
+\end{aligned}
+\]
+
+where:
+
+- \( \mathbf{W}_g \in \mathbb{R}^{d \times d} \): Goal projection matrix
+- \( \mathbf{W}_\sigma \in \mathbb{R}^{d \times 1} \): Gating projection matrix  
+- \( \tau > 0 \): Temperature parameter (typically \( \tau = 1.0 \))
+- \( \text{normalize}(\mathbf{v}) = \frac{\mathbf{v}}{\|\mathbf{v}\|_2 + \epsilon} \): L2 normalization
+
+**Periodic Update Schedule:**
+\[
+\mathbf{g}_t = \begin{cases}
+\text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right) & \text{if } t \bmod P = 0 \\
+\mathbf{g}_{t-1} & \text{otherwise}
+\end{cases}
+\]
+
+where \( P \) is the manager period (typically \( P = 3 \) or \( 4 \)), providing temporal stability while allowing adaptation.
+
+#### 2.3 Goal Injection into Hierarchical Updates
+
+The goal vector is injected as an additive bias into both H and L computations:
+
+**Modified Hierarchical Updates:**
+\[
+\begin{aligned}
+\mathbf{g}_t' &= \sigma_t \cdot \mathbf{g}_t \quad \text{(gated goal)} \\
+\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t + \mathbf{g}_t'\right) \\
+\mathbf{z}_H^{(t)} &= \text{H\_level}\left(\mathbf{z}_H^{(t-1)}, \mathbf{z}_L^{(t)} + \mathbf{g}_t'\right)
+\end{aligned}
+\]
+
+The gating signal \( \sigma_t \) modulates goal strength, allowing the manager to express confidence in the proposed direction.
+
+#### 2.4 Feudal Loss: Intrinsic Reward Signal
+
+The feudal loss provides an intrinsic reward that encourages the worker to align with the manager's goal:
+
+**Feudal Loss Definition:**
+\[
+\mathcal{L}_{\text{feudal}} = \sigma_t \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t)}, \mathbf{g}_t\right)\right)
+\]
+
+where \( \cos(\mathbf{a}, \mathbf{b}) = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{a}\|_2 \|\mathbf{b}\|_2} \) is the cosine similarity.
+
+**Properties:**
+
+- **Range**: \( \mathcal{L}_{\text{feudal}} \in [0, 2\sigma_t] \)
+  - Minimum (0): Perfect alignment (\( \cos = 1 \))
+  - Maximum (\( 2\sigma_t \)): Opposite directions (\( \cos = -1 \))
+- **Scale-invariant**: Normalization ensures directional semantics, independent of hidden state magnitude
+- **Differentiable**: Enables gradient-based optimization
+
+**Batch Aggregation:**
+\[
+\mathcal{L}_{\text{feudal}} = \sum_{i=1}^{B} \sigma_t^{(i)} \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t,i)}, \mathbf{g}_t^{(i)}\right)\right)
+\]
+
+#### 2.5 Combined Training Objective
+
+The total loss combines task-specific loss with feudal loss:
+\[
+\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{task}} + \lambda \cdot \mathcal{L}_{\text{feudal}}
+\]
+
+where:
+
+- \( \mathcal{L}_{\text{task}} \): Task loss (e.g., cross-entropy for sequence prediction)
+- \( \lambda \): Feudal loss weight (typically \( \lambda = 0.05 \))
+- \( \mathcal{L}_{\text{feudal}} \): Intrinsic reward loss
+
+**Gradient Flow:**
+\[
+\frac{\partial \mathcal{L}_{\text{total}}}{\partial \theta} = \frac{\partial \mathcal{L}_{\text{task}}}{\partial \theta} + \lambda \cdot \frac{\partial \mathcal{L}_{\text{feudal}}}{\partial \theta}
+\]
+
+The feudal loss provides additional gradient signals that:
+
+- Guide worker parameters \( \theta_L \) toward goal-aligned behaviors
+- Train manager parameters \( \theta_H \) to produce useful subgoals
+- Update subgoal head parameters \( \theta_g, \theta_\sigma \) to generate effective goals
+
+#### 2.6 Deep Supervision Compatibility
+
+To maintain HRM's deep supervision training stability, goals stored in state are detached from the computation graph:
+\[
+\mathbf{g}_t^{\text{stored}} = \text{detach}(\mathbf{g}_t)
+\]
+
+However, for feudal loss computation, we use non-detached goals to allow gradients to flow back to the subgoal head:
+\[
+\mathcal{L}_{\text{feudal}} = \sigma_t \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t)}, \mathbf{g}_t\right)\right) \quad \text{(non-detached)}
+\]
+
+This design preserves HRM's training stability while enabling end-to-end learning of the subgoal mechanism.
+
+### 3. Why Directional Subgoals Help HRM
+
+#### 3.1 Explicit Hierarchical Communication
+
+**Problem**: In baseline HRM, coordination between H and L is implicit—the worker must infer manager intent from shared hidden states.
+
+**Solution**: Directional subgoals provide explicit communication:
+
+- **Normalized vectors encode direction**: \( \mathbf{g}_t = \text{normalize}(\mathbf{W}_g \mathbf{z}_H) \) extracts directional intent
+- **Scale-invariant semantics**: Magnitude doesn't matter, only direction—robust to hidden state scaling
+- **Interpretable guidance**: The goal vector directly tells the worker "move in this direction"
+
+**Theoretical Justification**: This transforms an implicit coordination game into an explicit signaling problem, reducing the information-theoretic complexity of hierarchical learning.
+
+#### 3.2 Improved Credit Assignment
+
+**Problem**: When the worker performs actions, it's unclear which actions contribute to high-level objectives.
+
+**Solution**: Feudal loss provides immediate feedback:
+\[
+\mathcal{L}_{\text{feudal}} = \sigma_t \cdot (1 - \cos(\mathbf{z}_L, \mathbf{g}_t))
+\]
+
+- **Direct alignment signal**: Worker receives gradient signal proportional to alignment with goal
+- **Temporal credit assignment**: Each worker step is evaluated against current goal
+- **Gated importance**: Gate \( \sigma_t \) modulates how much credit matters
+
+**Theoretical Justification**: This implements a form of **intrinsic motivation** where the worker is rewarded for making progress toward manager-specified directions, similar to reward shaping in hierarchical RL.
+
+#### 3.3 Temporal Abstraction and Commitment
+
+**Problem**: Without temporal structure, goals may change too frequently, preventing worker from making progress.
+
+**Solution**: Periodic goal updates with persistence:
+\[
+\mathbf{g}_t = \begin{cases}
+\text{new goal} & \text{if } t \bmod P = 0 \\
+\mathbf{g}_{t-1} & \text{otherwise}
+\end{cases}
+\]
+
+- **Commitment period**: Worker has \( P \) steps to pursue a goal before it changes
+- **Stability**: Prevents goal thrashing that would confuse the worker
+- **Adaptability**: Regular updates allow refinement as manager learns
+
+**Theoretical Justification**: This implements a **temporal abstraction** where manager operates at a slower timescale (every \( P \) steps) than worker (every step), matching the hierarchical structure.
+
+#### 3.4 Exploration Guidance
+
+**Problem**: Worker may explore directions not aligned with manager's objectives.
+
+**Solution**: Directional goals guide exploration:
+
+- **Constrained exploration**: Worker explores in goal-aligned directions
+- **Intrinsic reward**: Feudal loss encourages discovery of goal-relevant patterns
+- **Reduced search space**: Focuses worker attention on promising regions
+
+**Theoretical Justification**: This implements **goal-conditioned exploration** where the worker's exploration is biased toward manager-specified directions, improving sample efficiency.
+
+### 4. Architectural Benefits to HRM
+
+#### 4.1 Minimal Overhead, Maximum Impact
+
+The feudal mechanism adds minimal computational cost:
+
+- **Small subgoal head**: Two linear projections (\( \mathbf{W}_g, \mathbf{W}_\sigma \)) with \( O(d^2) \) parameters
+- **Efficient loss**: Cosine similarity computation is \( O(d) \) per sample
+- **No architectural changes**: Integrates seamlessly with existing HRM structure
+
+**Result**: ~2.7% improvement in LM loss with <1% parameter overhead.
+
+#### 4.2 Compatibility with ACT Mechanism
+
+HRM uses Adaptive Computation Time (ACT) to dynamically determine computation steps. The feudal mechanism is fully compatible:
+
+- **Goal persistence**: Goals persist across ACT steps, providing consistent guidance
+- **Q-learning integration**: Feudal loss doesn't interfere with halt/continue Q-learning
+- **Deep supervision**: Detached goals maintain HRM's training stability
+
+**Result**: Feudal mechanism enhances ACT by providing directional guidance for each computation step.
+
+#### 4.3 Preserves Deep Supervision
+
+HRM's deep supervision training (detaching states between steps) is critical for stability. The feudal mechanism respects this:
+
+- **Stored goals detached**: Goals in carry state are detached to prevent gradient explosion
+- **Loss goals non-detached**: Feudal loss uses non-detached goals to enable learning
+- **Selective gradient flow**: Only feudal loss path has gradients, preserving stability
+
+**Result**: Maintains HRM's training stability while enabling subgoal learning.
+
+#### 4.4 Two-Way Learning
+
+The feudal mechanism enables bidirectional learning:
+
+- **Worker learns to follow**: Worker parameters learn to align with manager goals
+- **Manager learns to guide**: Manager parameters learn to produce useful goals
+- **Joint optimization**: Both levels improve through the shared feudal loss signal
+
+**Result**: Emergent specialization where manager becomes better at goal-setting and worker becomes better at goal-following.
+
+### 5. Real-World Use Cases and Applications
+
+#### 5.1 Symbolic Reasoning Tasks
+
+**ARC (Abstraction and Reasoning Corpus)**: Requires discovering patterns and applying them to new instances.
+
+- **Manager role**: Identifies abstract patterns (e.g., "find symmetry", "extract object")
+- **Worker role**: Executes pattern application (e.g., "rotate grid", "color matching cells")
+- **Feudal benefit**: Manager guides worker toward pattern-relevant operations, improving generalization
+
+**Sudoku Solving**: Requires constraint satisfaction and logical deduction.
+
+- **Manager role**: Plans high-level strategies (e.g., "focus on row 3", "eliminate candidates")
+- **Worker role**: Performs cell-level operations (e.g., "place digit", "update constraints")
+- **Feudal benefit**: Manager directs worker attention to promising regions, reducing search
+
+#### 5.2 Multi-Step Planning Tasks
+
+**Maze Navigation**: Requires path planning and execution.
+
+- **Manager role**: Plans high-level path segments (e.g., "move toward northeast corner")
+- **Worker role**: Executes step-by-step movements
+- **Feudal benefit**: Manager provides waypoint directions, worker follows efficiently
+
+**Tool Use and API Sequencing**: Requires orchestrating multiple tools to achieve goals.
+
+- **Manager role**: Plans tool sequences (e.g., "gather information → process → output")
+- **Worker role**: Executes individual tool calls
+- **Feudal benefit**: Manager guides worker through tool sequences, reducing errors
+
+#### 5.3 Long-Context Reasoning
+
+**Multi-Turn Conversations**: Requires maintaining context and planning responses.
+
+- **Manager role**: Maintains conversation goals and high-level intent
+- **Worker role**: Generates individual tokens and phrases
+- **Feudal benefit**: Manager keeps worker aligned with conversation objectives across long contexts
+
+**Document Analysis**: Requires understanding structure and extracting information.
+
+- **Manager role**: Identifies document sections and information types
+- **Worker role**: Performs token-level reading and extraction
+- **Feudal benefit**: Manager guides worker attention to relevant sections
+
+#### 5.4 Embodied AI and Robotics
+
+**Task Planning**: Requires breaking down tasks into executable actions.
+
+- **Manager role**: Plans task decomposition (e.g., "approach object → grasp → move")
+- **Worker role**: Executes low-level motor commands
+- **Feudal benefit**: Manager provides directional waypoints, worker executes smoothly
+
+**Navigation**: Requires path planning and obstacle avoidance.
+
+- **Manager role**: Plans high-level routes
+- **Worker role**: Executes local movements and obstacle avoidance
+- **Feudal benefit**: Manager provides directional guidance, worker adapts locally
+
+### 6. Algorithm Summary
+
+**Training Procedure:**
+
+```
+1. Initialize: z_H, z_L, subgoal_state = initial_state()
+2. For each batch:
+   a. Encode inputs: e = Embed(x, puzzle_id)
+   b. Update subgoal (if period reached):
+      g = normalize(W_g · z_H)
+      σ = sigmoid(W_σ · z_H / τ)
+   c. Hierarchical reasoning:
+      z_L = L_level(z_L, z_H + e + σ·g)
+      z_H = H_level(z_H, z_L + σ·g)
+   d. Compute losses:
+      L_task = CrossEntropy(lm_head(z_H), labels)
+      L_feudal = σ · (1 - cos(z_L, g))
+      L_total = L_task + λ · L_feudal
+   e. Backpropagate and update parameters
+   f. Detach states: z_H, z_L, g → stored for next step
+```
+
+**Key Hyperparameters:**
+
+- \( \lambda = 0.05 \): Feudal loss weight (balances task vs. intrinsic reward)
+- \( P = 3 \): Manager period (optimal balance of stability and adaptability)
+- \( \tau = 1.0 \): Gating temperature (controls gate sharpness)
+- Goal dimension: \( d \) (matches hidden size)
+
+---
+
+This section provides the theoretical foundation, mathematical formulation, and practical insights needed for your paper. Should I adjust any part or add more detail to specific subsections?
 
 ---
 
