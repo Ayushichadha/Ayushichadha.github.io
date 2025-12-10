@@ -341,8 +341,6 @@ The feudal mechanism enables bidirectional learning:
 
 ---
 
-This section provides the theoretical foundation, mathematical formulation, and practical insights needed for your paper. Should I adjust any part or add more detail to specific subsections?
-
 ---
 
 ## Does the math of HRM and Feudal Networks clash?
