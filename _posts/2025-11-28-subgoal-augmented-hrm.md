@@ -19,7 +19,7 @@ window.MathJax = {
 ## Contents
 
 - [Introduction: cognitive core reasoning](#introduction)
-- [Subgoal-Augmented HRM: Model Design & Training](#subgoal-augmented-hrm-model-design--training)
+- [Subgoal-Augmented HRM: Model Design and Training](#subgoal-augmented-hrm-model-design-and-training)
   - [Theoretical Foundation](#1-theoretical-foundation)
   - [Mathematical Formulation](#2-mathematical-formulation)
   - [Why Directional Subgoals Help](#3-why-directional-subgoals-help)
@@ -57,7 +57,7 @@ Together, they shift the design compass toward a cognitive core: a model that de
 
 ---
 
-## Subgoal-Augmented HRM: Model Design & Training
+## Subgoal-Augmented HRM: Model Design and Training
 
 ### 1. Theoretical Foundation
 
