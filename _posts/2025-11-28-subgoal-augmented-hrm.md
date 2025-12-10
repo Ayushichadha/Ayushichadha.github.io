@@ -89,17 +89,17 @@ We address these limitations by integrating a feudal subgoal mechanism inspired 
 At each time step \( t \), HRM processes input \( x_t \) through alternating H and L updates:
 
 **Input Encoding:**
-\[
+$$
 \mathbf{e}_t = \text{Embed}(x_t, \text{puzzle\_id})
-\]
+$$
 
 **Hierarchical Updates:**
-\[
+$$
 \begin{aligned}
-\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t\right) \\
+\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t\right) \\\\
 \mathbf{z}_H^{(t)} &= \text{H\_level}\left(\mathbf{z}_H^{(t-1)}, \mathbf{z}_L^{(t)}\right)
 \end{aligned}
-\]
+$$
 
 where L_level and H_level are transformer-based reasoning modules with \( L\_cycles \) and \( H\_cycles \) internal iterations respectively.
 
@@ -108,12 +108,12 @@ where L_level and H_level are transformer-based reasoning modules with \( L\_cyc
 The subgoal head transforms the manager's hidden state into a directional goal vector and optional gating signal:
 
 **Goal Generation:**
-\[
+$$
 \begin{aligned}
-\mathbf{g}_t &= \text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right) \\
+\mathbf{g}_t &= \text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right) \\\\
 \sigma_t &= \text{sigmoid}\left(\frac{\mathbf{W}_\sigma \cdot \mathbf{z}_H^{(t)}}{\tau}\right)
 \end{aligned}
-\]
+$$
 
 where:
 
@@ -123,12 +123,12 @@ where:
 - \( \text{normalize}(\mathbf{v}) = \frac{\mathbf{v}}{\|\mathbf{v}\|_2 + \epsilon} \): L2 normalization
 
 **Periodic Update Schedule:**
-\[
+$$
 \mathbf{g}_t = \begin{cases}
-\text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right) & \text{if } t \bmod P = 0 \\
-\mathbf{g}_{t-1} & \text{otherwise}
+\text{normalize}\left(\mathbf{W}_g \cdot \mathbf{z}_H^{(t)}\right), & \text{if } t \bmod P = 0 \\\\
+\mathbf{g}_{t-1}, & \text{otherwise}
 \end{cases}
-\]
+$$
 
 where \( P \) is the manager period (typically \( P = 3 \) or \( 4 \)), providing temporal stability while allowing adaptation.
 
@@ -137,13 +137,13 @@ where \( P \) is the manager period (typically \( P = 3 \) or \( 4 \)), providin
 The goal vector is injected as an additive bias into both H and L computations:
 
 **Modified Hierarchical Updates:**
-\[
+$$
 \begin{aligned}
-\mathbf{g}_t' &= \sigma_t \cdot \mathbf{g}_t \quad \text{(gated goal)} \\
-\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t + \mathbf{g}_t'\right) \\
+\mathbf{g}_t' &= \sigma_t \cdot \mathbf{g}_t \quad \text{(gated goal)} \\\\
+\mathbf{z}_L^{(t)} &= \text{L\_level}\left(\mathbf{z}_L^{(t-1)}, \mathbf{z}_H^{(t-1)} + \mathbf{e}_t + \mathbf{g}_t'\right) \\\\
 \mathbf{z}_H^{(t)} &= \text{H\_level}\left(\mathbf{z}_H^{(t-1)}, \mathbf{z}_L^{(t)} + \mathbf{g}_t'\right)
 \end{aligned}
-\]
+$$
 
 The gating signal \( \sigma_t \) modulates goal strength, allowing the manager to express confidence in the proposed direction.
 
@@ -152,9 +152,9 @@ The gating signal \( \sigma_t \) modulates goal strength, allowing the manager t
 The feudal loss provides an intrinsic reward that encourages the worker to align with the manager's goal:
 
 **Feudal Loss Definition:**
-\[
+$$
 \mathcal{L}_{\text{feudal}} = \sigma_t \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t)}, \mathbf{g}_t\right)\right)
-\]
+$$
 
 where \( \cos(\mathbf{a}, \mathbf{b}) = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{a}\|_2 \|\mathbf{b}\|_2} \) is the cosine similarity.
 
@@ -167,16 +167,16 @@ where \( \cos(\mathbf{a}, \mathbf{b}) = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\ma
 - **Differentiable**: Enables gradient-based optimization
 
 **Batch Aggregation:**
-\[
+$$
 \mathcal{L}_{\text{feudal}} = \sum_{i=1}^{B} \sigma_t^{(i)} \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t,i)}, \mathbf{g}_t^{(i)}\right)\right)
-\]
+$$
 
 #### 2.5 Combined Training Objective
 
 The total loss combines task-specific loss with feudal loss:
-\[
+$$
 \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{task}} + \lambda \cdot \mathcal{L}_{\text{feudal}}
-\]
+$$
 
 where:
 
@@ -185,9 +185,9 @@ where:
 - \( \mathcal{L}_{\text{feudal}} \): Intrinsic reward loss
 
 **Gradient Flow:**
-\[
+$$
 \frac{\partial \mathcal{L}_{\text{total}}}{\partial \theta} = \frac{\partial \mathcal{L}_{\text{task}}}{\partial \theta} + \lambda \cdot \frac{\partial \mathcal{L}_{\text{feudal}}}{\partial \theta}
-\]
+$$
 
 The feudal loss provides additional gradient signals that:
 
@@ -198,14 +198,14 @@ The feudal loss provides additional gradient signals that:
 #### 2.6 Deep Supervision Compatibility
 
 To maintain HRM's deep supervision training stability, goals stored in state are detached from the computation graph:
-\[
+$$
 \mathbf{g}_t^{\text{stored}} = \text{detach}(\mathbf{g}_t)
-\]
+$$
 
 However, for feudal loss computation, we use non-detached goals to allow gradients to flow back to the subgoal head:
-\[
+$$
 \mathcal{L}_{\text{feudal}} = \sigma_t \cdot \left(1 - \cos\left(\mathbf{z}_L^{(t)}, \mathbf{g}_t\right)\right) \quad \text{(non-detached)}
-\]
+$$
 
 This design preserves HRM's training stability while enabling end-to-end learning of the subgoal mechanism.
 
@@ -228,9 +228,9 @@ This design preserves HRM's training stability while enabling end-to-end learnin
 **Problem**: When the worker performs actions, it's unclear which actions contribute to high-level objectives.
 
 **Solution**: Feudal loss provides immediate feedback:
-\[
-\mathcal{L}_{\text{feudal}} = \sigma_t \cdot (1 - \cos(\mathbf{z}_L, \mathbf{g}_t))
-\]
+$$
+\mathcal{L}_{\text{feudal}} = \sigma_t \cdot \left(1 - \cos(\mathbf{z}_L, \mathbf{g}_t)\right)
+$$
 
 - **Direct alignment signal**: Worker receives gradient signal proportional to alignment with goal
 - **Temporal credit assignment**: Each worker step is evaluated against current goal
@@ -243,12 +243,12 @@ This design preserves HRM's training stability while enabling end-to-end learnin
 **Problem**: Without temporal structure, goals may change too frequently, preventing worker from making progress.
 
 **Solution**: Periodic goal updates with persistence:
-\[
+$$
 \mathbf{g}_t = \begin{cases}
-\text{new goal} & \text{if } t \bmod P = 0 \\
-\mathbf{g}_{t-1} & \text{otherwise}
+\text{new goal}, & \text{if } t \bmod P = 0 \\\\
+\mathbf{g}_{t-1}, & \text{otherwise}
 \end{cases}
-\]
+$$
 
 - **Commitment period**: Worker has \( P \) steps to pursue a goal before it changes
 - **Stability**: Prevents goal thrashing that would confuse the worker
