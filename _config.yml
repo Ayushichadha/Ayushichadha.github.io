@@ -6,6 +6,17 @@ url: "https://ayushichadha.github.io"
 
 theme: minima
 
+# Markdown and math rendering
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  math_engine_opts:
+    preview: false
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
 # Show these pages in the top nav
 header_pages:
   - index.md
