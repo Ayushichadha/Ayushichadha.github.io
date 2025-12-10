@@ -24,8 +24,7 @@ window.MathJax = {
   - [Mathematical Formulation](#2-mathematical-formulation)
   - [Why Directional Subgoals Help HRM](#3-why-directional-subgoals-help-hrm)
   - [Architectural Benefits to HRM](#4-architectural-benefits-to-hrm)
-  - [Real-World Use Cases and Applications](#5-real-world-use-cases-and-applications)
-  - [Algorithm Summary](#6-algorithm-summary)
+  - [Algorithm Summary](#5-algorithm-summary)
 - [Does the math of HRM and Feudal Networks clash?](#does-the-math-of-hrm-and-feudal-networks-clash)
 - [How feudal subgoals improve HRM (intuitively)](#how-feudal-subgoals-improve-hrm-intuitively)
 - [Results from experiments](#results-from-experiments)
@@ -311,84 +310,26 @@ The feudal mechanism enables bidirectional learning:
 
 **Result**: Emergent specialization where manager becomes better at goal-setting and worker becomes better at goal-following.
 
-### 5. Real-World Use Cases and Applications
-
-#### 5.1 Symbolic Reasoning Tasks
-
-**ARC (Abstraction and Reasoning Corpus)**: Requires discovering patterns and applying them to new instances.
-
-- **Manager role**: Identifies abstract patterns (e.g., "find symmetry", "extract object")
-- **Worker role**: Executes pattern application (e.g., "rotate grid", "color matching cells")
-- **Feudal benefit**: Manager guides worker toward pattern-relevant operations, improving generalization
-
-**Sudoku Solving**: Requires constraint satisfaction and logical deduction.
-
-- **Manager role**: Plans high-level strategies (e.g., "focus on row 3", "eliminate candidates")
-- **Worker role**: Performs cell-level operations (e.g., "place digit", "update constraints")
-- **Feudal benefit**: Manager directs worker attention to promising regions, reducing search
-
-#### 5.2 Multi-Step Planning Tasks
-
-**Maze Navigation**: Requires path planning and execution.
-
-- **Manager role**: Plans high-level path segments (e.g., "move toward northeast corner")
-- **Worker role**: Executes step-by-step movements
-- **Feudal benefit**: Manager provides waypoint directions, worker follows efficiently
-
-**Tool Use and API Sequencing**: Requires orchestrating multiple tools to achieve goals.
-
-- **Manager role**: Plans tool sequences (e.g., "gather information → process → output")
-- **Worker role**: Executes individual tool calls
-- **Feudal benefit**: Manager guides worker through tool sequences, reducing errors
-
-#### 5.3 Long-Context Reasoning
-
-**Multi-Turn Conversations**: Requires maintaining context and planning responses.
-
-- **Manager role**: Maintains conversation goals and high-level intent
-- **Worker role**: Generates individual tokens and phrases
-- **Feudal benefit**: Manager keeps worker aligned with conversation objectives across long contexts
-
-**Document Analysis**: Requires understanding structure and extracting information.
-
-- **Manager role**: Identifies document sections and information types
-- **Worker role**: Performs token-level reading and extraction
-- **Feudal benefit**: Manager guides worker attention to relevant sections
-
-#### 5.4 Embodied AI and Robotics
-
-**Task Planning**: Requires breaking down tasks into executable actions.
-
-- **Manager role**: Plans task decomposition (e.g., "approach object → grasp → move")
-- **Worker role**: Executes low-level motor commands
-- **Feudal benefit**: Manager provides directional waypoints, worker executes smoothly
-
-**Navigation**: Requires path planning and obstacle avoidance.
-
-- **Manager role**: Plans high-level routes
-- **Worker role**: Executes local movements and obstacle avoidance
-- **Feudal benefit**: Manager provides directional guidance, worker adapts locally
-
-### 6. Algorithm Summary
+### 5. Algorithm Summary
 
 **Training Procedure:**
 
 ```
-1. Initialize: z_H, z_L, subgoal_state = initial_state()
+1. Initialize: \( z_H, z_L, \text{subgoal\_state} = \text{initial\_state}() \)
 2. For each batch:
-   a. Encode inputs: e = Embed(x, puzzle_id)
+   a. Encode inputs: \( e = \text{Embed}(x, \text{puzzle\_id}) \)
    b. Update subgoal (if period reached):
-      g = normalize(W_g · z_H)
-      σ = sigmoid(W_σ · z_H / τ)
+      \( g = \text{normalize}(W_g \cdot z_H) \)
+      \( \sigma = \text{sigmoid}(W_\sigma \cdot z_H / \tau) \)
    c. Hierarchical reasoning:
-      z_L = L_level(z_L, z_H + e + σ·g)
-      z_H = H_level(z_H, z_L + σ·g)
+      \( z_L = \text{L\_level}(z_L, z_H + e + \sigma \cdot g) \)
+      \( z_H = \text{H\_level}(z_H, z_L + \sigma \cdot g) \)
    d. Compute losses:
-      L_task = CrossEntropy(lm_head(z_H), labels)
-      L_feudal = σ · (1 - cos(z_L, g))
-      L_total = L_task + λ · L_feudal
+      \( L_{\text{task}} = \text{CrossEntropy}(\text{lm\_head}(z_H), \text{labels}) \)
+      \( L_{\text{feudal}} = \sigma \cdot (1 - \cos(z_L, g)) \)
+      \( L_{\text{total}} = L_{\text{task}} + \lambda \cdot L_{\text{feudal}} \)
    e. Backpropagate and update parameters
-   f. Detach states: z_H, z_L, g → stored for next step
+   f. Detach states: \( z_H, z_L, g \to \) stored for next step
 ```
 
 **Key Hyperparameters:**
