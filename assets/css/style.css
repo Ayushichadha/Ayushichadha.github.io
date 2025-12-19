@@ -202,6 +202,17 @@ pre {
   display: none;
 }
 
+/* Homepage section styling - keep minimal */
+.home .page-content h2 {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* Footer styling - single line flex layout */
 .site-footer {
   border-top: 1px solid #e8e8e8;
