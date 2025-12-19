@@ -1,0 +1,223 @@
+/* Technical Typography & Code Styling */
+
+/* Base typography - only apply to page content, not entire body */
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-content p,
+.page-content li,
+.page-content td {
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Headings scale */
+.page-content h1 {
+  font-size: 2.2em;
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  font-weight: 600;
+}
+
+.page-content h2 {
+  font-size: 1.8em;
+  line-height: 1.4;
+  margin-top: 1.3em;
+  margin-bottom: 0.7em;
+  font-weight: 600;
+}
+
+.page-content h3 {
+  font-size: 1.4em;
+  line-height: 1.5;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  font-weight: 600;
+}
+
+.page-content h4 {
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+/* Paragraph spacing */
+.page-content p {
+  margin-bottom: 1em;
+}
+
+/* Lists */
+.page-content ul, 
+.page-content ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+}
+
+.page-content li {
+  margin-bottom: 0.5em;
+}
+
+/* Code blocks */
+.page-content pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1em;
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin: 1.5em 0;
+}
+
+.page-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+/* Inline code */
+.page-content code {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  font-size: 0.9em;
+  color: #c7254e;
+}
+
+.page-content pre code {
+  background: none;
+  border: none;
+  color: #333;
+}
+
+/* Math blocks */
+.MathJax {
+  font-size: 1.1em;
+}
+
+/* Table of Contents */
+.page-content #markdown-toc,
+.page-content ul:has(> li > a[href^="#"]) {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 1.5em;
+  margin: 2em 0;
+}
+
+.page-content ul:has(> li > a[href^="#"]) {
+  list-style: none;
+  padding-left: 1.5em;
+}
+
+.page-content ul:has(> li > a[href^="#"]) li {
+  margin-bottom: 0.5em;
+  padding-left: 0;
+}
+
+.page-content ul:has(> li > a[href^="#"]) a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+.page-content ul:has(> li > a[href^="#"]) a:hover {
+  text-decoration: underline;
+}
+
+.page-content ul:has(> li > a[href^="#"]) ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1.5em;
+}
+
+/* Links */
+.page-content a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.page-content a:hover {
+  text-decoration: underline;
+}
+
+/* Blockquotes */
+.page-content blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 1em;
+  margin-left: 0;
+  color: #666;
+  font-style: italic;
+}
+
+/* Tables */
+.page-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+.page-content table th,
+.page-content table td {
+  border: 1px solid #ddd;
+  padding: 0.6em;
+  text-align: left;
+}
+
+.page-content table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+/* Horizontal rules */
+.page-content hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2em 0;
+}
+
+/* Ensure code blocks scroll on overflow */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .page-content {
+    padding: 0 15px;
+  }
+  
+  .page-content h1 {
+    font-size: 1.8em;
+  }
+  
+  .page-content h2 {
+    font-size: 1.5em;
+  }
+  
+  .page-content h3 {
+    font-size: 1.2em;
+  }
+  
+  .page-content pre {
+    font-size: 0.85em;
+    padding: 0.8em;
+  }
+}
+

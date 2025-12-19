@@ -17,8 +17,8 @@ I'm developing a **Subgoal-Augmented Hierarchical Reasoning Model (HRM)**, which
 
 ### Getting Started
 
-- 👉 **[Full Research Details »](/research/)** — Architecture, mathematics, experiments, and results
-- 📝 **[About Me »](/about/)** — Background and research interests
+- 👉 **[Full Research Details »]({{ site.baseurl }}/research/)** — Architecture, mathematics, experiments, and results
+- 📝 **[About Me »]({{ site.baseurl }}/about/)** — Background and research interests
 - 🔗 **[GitHub Repository](https://github.com/Ayushichadha/scout)** — Code and implementation
 
 ---
