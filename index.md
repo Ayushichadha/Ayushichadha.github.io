@@ -3,8 +3,6 @@ layout: home
 title: "Home"
 ---
 
-## Welcome
-
 Hi, I'm **Ayushi**, an independent researcher exploring small reasoning systems — models that trade encyclopedic memory for stronger algorithms of intelligence: planning, subgoals, and adaptive problem solving.
 
 ## Current Work
