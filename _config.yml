@@ -21,8 +21,6 @@ kramdown:
 header_pages:
   - index.md
   - research.md
-  - implementation.md
-  - experiments.md
   - about.md
 
 # Optional: social links (fill if you want)
