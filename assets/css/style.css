@@ -233,13 +233,13 @@ pre {
   font-size: 1.3em;
   font-weight: 500;
   line-height: 1.5;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   color: #333;
 }
 
 .homepage-intro .intro-text {
   text-align: left;
-  margin-top: 2em;
+  margin-top: 0;
 }
 
 .homepage-intro .intro-text p {
