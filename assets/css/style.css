@@ -202,6 +202,41 @@ pre {
   display: none;
 }
 
+/* Homepage intro block styling */
+.homepage-intro {
+  text-align: center;
+  margin: 48px 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homepage-intro .intro-quote {
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.8em;
+  color: #333;
+}
+
+.homepage-intro .intro-attribution {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 2em;
+  font-style: italic;
+}
+
+.homepage-intro .intro-text {
+  text-align: left;
+  margin-top: 2em;
+}
+
+.homepage-intro .intro-text p {
+  margin-bottom: 1.2em;
+  line-height: 1.7;
+  color: #333;
+}
+
 /* Homepage section styling - keep minimal */
 .home .page-content h2 {
   font-size: 1.1em;
