@@ -6,6 +6,7 @@ title: "Home"
 <div class="homepage-intro">
   <div class="intro-quote">"The most interesting AI systems will feel like thinking with a new part of your brain."</div>
   <div class="intro-attribution">— Andrej Karpathy</div>
+  <div class="intro-line">Hi, I'm Ayushi, a researcher exploring cognitive reasoning cores, where intelligence is an algorithm.</div>
   <div class="intro-text">
     <p>I am obsessed with the idea of personalized AI devices that exhibit fluid intelligence.</p>
     <p>Not systems that replace human thinking, but ones that merge with it, augmenting attention, memory, reasoning, and imagination in ways that feel continuous rather than external. I think of intelligence as something that should live close to the body and mind, adapt with context, and evolve alongside the person using it.</p>
@@ -13,8 +14,6 @@ title: "Home"
     <p>This portfolio is a snapshot of that pursuit.</p>
   </div>
 </div>
-
-Hi, I'm **Ayushi**, an independent researcher exploring small reasoning systems — models that trade encyclopedic memory for stronger algorithms of intelligence: planning, subgoals, and adaptive problem solving.
 
 - [Research]({{ "/research/" | relative_url }}) — Architecture, mathematics, experiments, and results
 - [About]({{ "/about/" | relative_url }}) — Background and research interests

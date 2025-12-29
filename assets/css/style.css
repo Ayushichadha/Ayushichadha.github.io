@@ -222,8 +222,16 @@ pre {
 .homepage-intro .intro-attribution {
   font-size: 0.9em;
   color: #666;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
   font-style: italic;
+}
+
+.homepage-intro .intro-line {
+  font-size: 1.3em;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 2em;
+  color: #333;
 }
 
 .homepage-intro .intro-text {
