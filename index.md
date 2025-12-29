@@ -11,8 +11,8 @@ Hi, I'm **Ayushi**, an independent researcher exploring small reasoning systems 
 
 ## Recent
 
-- [Post 1](https://x.com/AyushiChadha24/status/1945192888360690175)
-- [Post 2](https://x.com/AyushiChadha24/status/1948106326367965337)
-- [Post 3](https://x.com/AyushiChadha24/status/1948450437159387520)
-- [Post 4](https://x.com/AyushiChadha24/status/1951731429609455742)
-- [Post 5](https://x.com/AyushiChadha24/status/1990374071796924636)
+- [fast intuition vs slow deliberation](https://x.com/AyushiChadha24/status/1945192888360690175)
+- [how intuition hands off to reasoning (and back)](https://x.com/AyushiChadha24/status/1948106326367965337)
+- [design fiction](https://x.com/AyushiChadha24/status/1948450437159387520)
+- [equivalent of sleep in ai?](https://x.com/AyushiChadha24/status/1951731429609455742)
+- [research x poetry](https://x.com/AyushiChadha24/status/1990374071796924636)
