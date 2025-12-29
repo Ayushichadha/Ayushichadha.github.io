@@ -214,8 +214,8 @@ pre {
 .homepage-intro .intro-quote {
   font-size: 1.5em;
   font-weight: 400;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic !important;
+  font-family: Georgia, "Times New Roman", Times, serif !important;
   line-height: 1.5;
   margin-bottom: 0.8em;
   color: #333;
@@ -223,8 +223,8 @@ pre {
 
 .homepage-intro .intro-attribution {
   font-size: 0.9em;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic !important;
+  font-family: Georgia, "Times New Roman", Times, serif !important;
   color: #666;
   margin-bottom: 1.5em;
 }
