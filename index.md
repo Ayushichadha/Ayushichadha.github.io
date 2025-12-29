@@ -8,10 +8,8 @@ title: "Home"
   <div class="intro-attribution">— Andrej Karpathy</div>
   <div class="intro-line">Hi, I'm Ayushi, a researcher exploring cognitive reasoning cores, where intelligence is an algorithm.</div>
   <div class="intro-text">
-    <p>I am obsessed with the idea of personalized AI devices that exhibit fluid intelligence.</p>
-    <p>Not systems that replace human thinking, but ones that merge with it, augmenting attention, memory, reasoning, and imagination in ways that feel continuous rather than external. I think of intelligence as something that should live close to the body and mind, adapt with context, and evolve alongside the person using it.</p>
-    <p>My work explores this symbiosis from multiple angles: building compact reasoning systems, studying how goals and cognition shift over time, and imagining interfaces and machines where human and artificial intelligence form a single, extended cognitive loop.</p>
-    <p>This portfolio is a snapshot of that pursuit.</p>
+    <p>I'm exploring the idea of personalized AI devices that exhibit fluid intelligence. These are systems that merge with human cognition, augmenting attention, memory, reasoning, and imagination in ways that feel continuous rather than external. I see intelligence as something that should live close to the body and mind, context-aware, adaptive, and evolving alongside the person using it.</p>
+    <p>My work approaches this symbiosis from multiple angles: building compact reasoning systems, studying how goals and cognition shift over time, and imagining interfaces and machines where human and artificial intelligence form a single, extended cognitive loop.</p>
   </div>
 </div>
 
