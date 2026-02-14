@@ -17,6 +17,7 @@ title: "Home"
 - [About]({{ "/about/" | relative_url }}) — Background and research interests
 - [GitHub](https://github.com/Ayushichadha/scout) — Code and implementation
 - [Research paper (PDF)]({{ "/assets/SubGoal_Augmented_HRM_Research.pdf" | relative_url }}) — View or download
+- [CV (PDF)]({{ "/assets/AyushiChadhaCV26.pdf" | relative_url }}) — View or download
 
 ## Recent
 
