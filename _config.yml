@@ -26,3 +26,6 @@ header_pages:
 # Optional: social links (fill if you want)
 github_username: Ayushichadha
 twitter_username: AyushiChadha24
+
+# Optional GA4 measurement ID. Empty means analytics is disabled.
+google_analytics: ""
