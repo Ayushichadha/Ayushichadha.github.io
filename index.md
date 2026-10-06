@@ -111,10 +111,10 @@ description: Independent researcher and software engineer working on recurrent a
 
       <article class="entry experience-entry">
         <div class="entry-heading">
-          <div><h3>Propero</h3><p class="role">Software Engineering Intern, then Software Developer</p></div>
-          <p class="date">Aug 2021 to Dec 2024</p>
+          <div><h3>Propero</h3><p class="role">Software Developer</p></div>
+          <p class="date">Aug 2022 to Dec 2024</p>
         </div>
-        <p>I joined as a software engineering intern in August 2021 and moved into a software developer role in January 2022. My early work covered browser automation, DOM-tree representations, and machine learning experiments for more robust automation.</p>
+        <p>My early work covered browser automation, DOM-tree representations, and machine learning experiments for more robust automation.</p>
         <p>I later led the design and engineering of ShopiBot, an assistant grounded in the Shopify developer domain. I worked across problem definition, retrieval pipelines, query analysis and routing, evaluation, testing, and the developer experience. I also studied and tested contemporary retrieval techniques, gave internal seminars during the company’s move toward AI-based automation, and built technical demos for prospective startup partnerships in the United States.</p>
         <p>The work required balancing research questions with product and business constraints. I worked directly with the CEO on priorities, partnerships, and the pace between experimentation and delivery.</p>
       </article>
