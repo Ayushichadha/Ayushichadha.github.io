@@ -100,7 +100,7 @@ description: Independent researcher and software engineer working on recurrent a
         <div class="timeline-row"><time>Jul 2026</time><p>Admitted to the MS in Artificial Intelligence at Northeastern University with the International Impact Award, covering 30% of tuition. I chose not to enroll and continued my independent research.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p>Advanced through the MATS empirical research assessments and was invited to complete the next written application stage for a Redwood Research stream. This was an application-stage selection, not a fellowship appointment.</p></div>
         <div class="timeline-row"><time>May 2026</time><p><em>When to Re-Plan</em> was accepted at the Compositional Learning Workshop at ICML 2026 in Seoul, South Korea.</p></div>
-        <div class="timeline-row"><time>Sep 2025</time><p>Advanced to the technical assessment stage of the Anthropic Fellows Program. The program application described a planned global cohort of 32; this was an assessment-stage selection, not a fellowship appointment.</p></div>
+        <div class="timeline-row"><time>Sep 2025</time><p>Advanced to the technical assessment stage of the Anthropic Fellows Program. The application stated that the cohort would include 32 participants; this was an assessment-stage selection, not a fellowship appointment.</p></div>
         <div class="timeline-row"><time>Jan 2025</time><p>Began independent research on recurrent and latent reasoning, adaptive computation, and hierarchical control.</p></div>
         <div class="timeline-row"><time>Jul 2024</time><p>Selected for the contributor program at Unify, a London-based, Y Combinator-backed startup working on model routing.</p></div>
       </div>
