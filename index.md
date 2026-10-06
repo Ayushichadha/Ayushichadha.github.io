@@ -87,7 +87,7 @@ description: Independent researcher and software engineer working on recurrent a
         <p class="meta"><strong>Under review</strong> · Sole author · 2026</p>
         <p>This paper examines a cautionary result from learned re-planning: a controller can produce a varying score while still making nearly constant decisions, and those decisions may not improve the final task outcome. The work separates score variation, behavioral adaptation, and performance improvement rather than treating them as the same result.</p>
         <p>The distinction may also matter for compound agentic systems and meta-agents that modify prompts, programs, or agent harnesses. A system can appear adaptive because an internal evaluator changes while its interventions remain narrow or ineffective. This is a broader research direction; the experiments in this paper are limited to a hierarchical latent reasoner.</p>
-        <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a></p>
+        <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a><span>Code to be released</span></p>
       </article>
     </section>
 
