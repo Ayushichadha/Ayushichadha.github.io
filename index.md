@@ -18,7 +18,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ayushi Chadha">
   <meta name="twitter:description" content="Research on latent reasoning, hierarchical control, and adaptive computation.">
-  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261007b">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
