@@ -44,4 +44,6 @@ main.wrap>section:not(.intro){padding-top:29px;padding-bottom:35px}
 .timeline-row{grid-template-columns:95px 1fr;gap:18px;padding-bottom:13px}
 .experience-entry+.experience-entry{margin-top:25px}
 .site-footer{font-size:12px;padding-top:17px;padding-bottom:26px}
+.section-end{border:0;border-top:1px solid #ddd;margin:29px 0 22px}
+.closing-line{max-width:720px;margin-bottom:0}
 @media(max-width:600px){body{font-size:14px}.wrap{padding-left:21px;padding-right:21px}.header-inner{min-height:auto}.intro{padding-top:32px}.intro-lead{font-size:17px}h1{font-size:32px}h2{font-size:22px}.timeline-row{grid-template-columns:1fr;gap:0}}

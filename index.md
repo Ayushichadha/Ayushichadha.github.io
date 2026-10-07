@@ -83,7 +83,8 @@ description: Researcher and engineer working on reasoning and agentic systems, l
         <p>This reframes supervisory control around <strong>decision value</strong>: how much improvement is actually available from changing the decision, and whether a learned controller can capture it.</p>
         <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a><span>Code to be released</span></p>
       </article>
-      <p class="closing-line">Together, these projects study a broader problem in reasoning systems: <strong>how computation should be structured over time, when internal intent should change, and how to tell whether learned control over those decisions is genuinely useful.</strong></p>
+      <hr class="section-end">
+      <p class="closing-line"><em>Together, these projects study a broader problem in reasoning systems: <strong>how computation should be structured over time, when internal intent should change, and how to tell whether learned control over those decisions is genuinely useful.</strong></em></p>
     </section>
 
     <section id="saint" aria-labelledby="saint-title">
@@ -144,7 +145,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <h2 id="writing-title">Writing &amp; Research Journey</h2>
       <p>My research grew from questions around abstraction, recurrence, memory, and how useful computation can happen without being fully externalized as language.</p>
       <p>I keep longer notes on the papers, books, experiments, failed directions, and ideas that shaped this work separately.</p>
-      <p class="direct-links"><a href="{{ '/about/' | relative_url }}">Research journey</a><a href="https://substack.com/@ayushi25">Substack</a><a href="{{ '/reading.html' | relative_url }}">Selected reading</a></p>
+      <p class="direct-links"><a href="{{ '/about/' | relative_url }}">Research journey</a><a href="https://substack.com/@ayushi25">Substack</a><a href="{{ '/reading/' | relative_url }}">Selected reading</a></p>
     </section>
   </main>
 
