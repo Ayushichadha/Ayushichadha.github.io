@@ -19,7 +19,7 @@ kramdown:
 
 # Show these pages in the top nav
 header_pages:
-  - index.md
+  - index.html
   - research.md
 
 # Optional: social links (fill if you want)
