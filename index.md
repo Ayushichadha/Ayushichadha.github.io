@@ -65,7 +65,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <h2 id="research-title">Selected Research</h2>
       <article class="entry research-entry">
         <h3>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</h3>
-        <p class="meta"><strong>Accepted · 2nd Workshop on Compositional Learning at ICML 2026 · Seoul, South Korea · Sole author</strong></p>
+        <p class="meta"><strong>Accepted · 2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026 · Seoul, South Korea · Sole author</strong></p>
         <p>This work studies <strong>latent-space reasoning at recurrent depth</strong> through the problem of temporal abstraction.</p>
         <p><em>How long should a latent reasoner commit to an intent before revising it?</em></p>
         <p>I extend the Hierarchical Reasoning Model with a manager-worker interface in which a slow high-level module emits a <strong>directional subgoal in latent space</strong>. The subgoal represents <strong>medium-horizon intent</strong> and persists across multiple low-level recurrent steps, steering the worker's hidden-state trajectory without specifying an absolute target.</p>
@@ -118,7 +118,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
     <section id="service" aria-labelledby="service-title">
       <h2 id="service-title">Research Service</h2>
       <p><strong>Invited Reviewer</strong><br>NeurIPS 2026 Workshop on Responsible Use of Meta-Agents</p>
-      <p><strong>Reviewer</strong><br>2nd Workshop on Compositional Learning at ICML 2026</p>
+      <p><strong>Reviewer</strong><br>2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026</p>
     </section>
 
     <section id="education" aria-labelledby="education-title">
@@ -134,8 +134,8 @@ description: Researcher and engineer working on reasoning and agentic systems, l
         <div class="timeline-row"><time>Sep 2026</time><p>Released <em>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</em> as a preprint.</p></div>
         <div class="timeline-row"><time>Sep 2026</time><p>Invited to review for the NeurIPS 2026 Workshop on Responsible Use of Meta-Agents.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p>Advanced through the Research Taste Test and Applied AI Assessment for the MATS 2026 Empirical Research Track.</p></div>
-        <div class="timeline-row"><time>Jun 2026</time><p><em>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</em> accepted at the 2nd Workshop on Compositional Learning at ICML 2026 in Seoul.</p></div>
-        <div class="timeline-row"><time>May 2026</time><p>Served as a reviewer for the 2nd Workshop on Compositional Learning at ICML 2026.</p></div>
+        <div class="timeline-row"><time>Jun 2026</time><p><em>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</em> accepted at the 2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026 in Seoul.</p></div>
+        <div class="timeline-row"><time>May 2026</time><p>Served as a reviewer for the 2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026.</p></div>
         <div class="timeline-row"><time>Sep 2025</time><p>Advanced to the technical assessment stage of the Anthropic Fellows Program.</p></div>
         <div class="timeline-row"><time>Jan 2025</time><p>Began focused work on recurrent and latent reasoning, adaptive computation, and hierarchical control.</p></div>
       </div>
