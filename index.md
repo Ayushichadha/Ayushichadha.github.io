@@ -1,36 +1,153 @@
 ---
 layout: null
-title: "Home"
-permalink: /
+title: Ayushi Chadha
+description: Researcher and engineer working on reasoning and agentic systems, latent reasoning, hierarchical control, and adaptive computation.
 ---
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Ayushi Chadha researches latent reasoning, adaptive computation, and meta-control.">
-<title>Ayushi Chadha — Research & Engineering</title>
-<style>
-:root{color-scheme:light;--ink:#191919;--muted:#666;--line:#dedede}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:48px}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-underline-offset:5px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible{outline:2px solid #191919;outline-offset:6px}.skip{position:absolute;left:20px;top:-100px}.skip:focus{top:12px;background:white;padding:8px}.shell{max-width:1160px;margin:0 auto;padding:82px 64px 30px;display:grid;grid-template-columns:180px minmax(0,680px);gap:76px}aside{align-self:start;position:sticky;top:65px}.wordmark{font-family:Georgia,serif;font-size:24px;letter-spacing:-1px;text-decoration:none}.side-note{font-size:13px;color:var(--muted);margin:4px 0 44px}.nav{display:flex;flex-direction:column;gap:13px}.nav a{font-size:14px;text-decoration:none;color:var(--muted);width:fit-content}.nav a:hover,.nav a.active{color:var(--ink)}.nav a.active{box-shadow:0 1px var(--ink)}.edition{margin-top:58px;font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}.intro{padding:0 0 54px}.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;margin:0 0 18px;color:var(--muted)}h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:64px;line-height:1.1;letter-spacing:-2.8px;margin:0 0 28px}h2{font-family:Georgia,'Times New Roman',serif;font-size:29px;font-weight:400;letter-spacing:-.6px;margin:0}h3{font-size:19px;font-weight:500;line-height:1.45;margin:0 0 5px}.lead{font-size:20px;line-height:1.65;max-width:610px;margin:0 0 20px}.placeholder{color:#666}.intro-note{max-width:590px;margin:0}.profile-links{display:flex;flex-wrap:wrap;gap:9px 20px;margin-top:26px;font-size:14px}.pending{color:#777}.pending small{font-size:11px;margin-left:4px}.section{border-top:1px solid var(--line);padding:28px 0 48px;scroll-margin-top:30px}.section-heading{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:29px}.section-no{font-size:12px;color:#777;font-variant-numeric:tabular-nums}.entry-head{display:flex;justify-content:space-between;gap:25px;align-items:baseline}.date{font-size:13px;color:var(--muted);white-space:nowrap}.meta{color:var(--muted);font-size:14px;margin:3px 0 18px}.entry p{margin:12px 0}.entry+.entry{border-top:1px solid #ededed;margin-top:28px;padding-top:27px}.detail-grid{display:grid;grid-template-columns:105px 1fr;gap:14px 20px;margin-top:24px;font-size:15px}.detail-grid dt{font-size:12px;letter-spacing:.07em;text-transform:uppercase;padding-top:3px}.detail-grid dd{margin:0;color:var(--muted)}details{margin-top:22px;border-top:1px solid #ededed;padding-top:14px;font-size:14px}summary{cursor:pointer;width:fit-content;list-style:none}summary::-webkit-details-marker{display:none}summary::after{content:'+';margin-left:14px}details[open] summary::after{content:'−'}details p{color:var(--muted)}.research-label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}.writing-row{padding:20px 0;border-bottom:1px solid #ededed;display:flex;justify-content:space-between;gap:20px}.writing-row:first-of-type{padding-top:0}.writing-row h3{font-family:Georgia,serif;font-size:21px}.writing-row p{font-size:14px;color:var(--muted);margin:5px 0}.writing-state{font-size:12px;color:var(--muted);white-space:nowrap;padding-top:5px}.cv-note{font-size:14px;color:var(--muted);margin:10px 0 0}footer{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:21px 0 10px;font-size:12px;color:var(--muted);gap:20px}.draft-note{font-size:12px;color:#666;background:#f5f5f5;padding:10px 15px;margin:0 0 33px;border-left:2px solid #bbb}@media(max-width:850px){.shell{padding:42px 30px;grid-template-columns:135px minmax(0,1fr);gap:38px}h1{font-size:54px}.entry-head{display:block}.date{display:block;margin:5px 0}.detail-grid{grid-template-columns:90px 1fr}}@media(max-width:600px){.shell{display:block;padding:25px 24px}aside{position:static;margin-bottom:42px}.side-note,.edition{display:none}.wordmark{font-size:24px}.nav{flex-direction:row;flex-wrap:wrap;gap:20px;margin-top:17px}.nav a{font-size:13px}h1{font-size:49px;letter-spacing:-2px}.lead{font-size:18px}.intro{padding-bottom:38px}.section{padding-bottom:34px}.section-heading{margin-bottom:23px}.detail-grid{display:block}.detail-grid dt{margin-top:16px}.detail-grid dd{margin-top:4px}.writing-row{display:block}.writing-state{display:block;margin-top:9px}footer{flex-direction:column;gap:2px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{aside,.draft-note{display:none}.shell{display:block;padding:0;max-width:100%}.section{break-inside:avoid}details{display:none}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ayushi Chadha</title>
+  <meta name="description" content="Researcher and engineer working on reasoning and agentic systems, latent reasoning, hierarchical control, and adaptive computation.">
+  <link rel="canonical" href="{{ site.url }}/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ayushi Chadha">
+  <meta property="og:description" content="Research on latent reasoning, hierarchical control, and adaptive computation.">
+  <meta property="og:url" content="{{ site.url }}/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ayushi Chadha">
+  <meta name="twitter:description" content="Research on latent reasoning, hierarchical control, and adaptive computation.">
+  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261008">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ayushi Chadha",
+    "url": "{{ site.url }}/",
+    "sameAs": [
+      "https://github.com/Ayushichadha",
+      "https://www.linkedin.com/in/ayushi-chadha-ai",
+      "https://x.com/AyushiChadha24",
+      "https://substack.com/@ayushi25"
+    ],
+    "knowsAbout": ["latent reasoning", "recurrent reasoning", "hierarchical control", "adaptive computation", "agentic systems"]
+  }
+  </script>
+  {% include analytics.html %}
 </head>
-<body><a class="skip" href="#main">Skip to content</a><div class="shell">
-<aside><a class="wordmark" href="#about">Ayushi Chadha</a><p class="side-note">Research & engineering</p><nav class="nav" aria-label="Main navigation"><a href="#about" class="active">About</a><a href="#research">Research</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#writing">Writing</a><a href="#cv">CV & contact</a></nav><div class="edition">Based in India<br>Open to global relocation</div></aside>
-<main id="main">
-<section class="intro" id="about"><h1>Ayushi Chadha</h1><p class="lead">I study how reasoning systems decide when to persist, revise, and re-plan.</p><p class="intro-note">My research focuses on latent and recurrent reasoning, adaptive computation, and meta-level control. I study how internal subgoals persist—and whether learned revision policies improve on fixed schedules.</p><p class="intro-note" style="margin-top:16px">Previously, I built LLM applications, retrieval pipelines, and agentic workflows at Propero Consulting. I now pursue independent research connecting the mechanics of reasoning with the evaluation of supervisory decisions.</p><div class="profile-links"><a href="mailto:ayushichadha48@gmail.com">Email</a><a href="/assets/Ayushi_Chadha_CV.pdf">CV</a><a href="https://github.com/Ayushichadha">GitHub</a><a href="https://www.linkedin.com/in/ayushi-chadha-ai">LinkedIn</a><a href="https://x.com/AyushiChadha24">X</a></div></section>
-<section class="section" id="research"><div class="section-heading"><h2>Selected research</h2><span class="section-no">01</span></div>
-<article class="entry"><div class="research-label">Hierarchical latent reasoning · Subgoal persistence</div><h3>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</h3><p class="meta">Sole author · January 2025–May 2026<br>Accepted · CompLearn Workshop at ICML 2026</p><p>How long should an internal directional subgoal persist before revision? I extended the Hierarchical Reasoning Model with a feudal-style manager–worker interface, making persistence an explicit variable in latent reasoning.</p><p>At alignment weight λ = 0.05, moderate persistence periods (P = 3–6) outperformed single-step re-planning and long horizons. Re-planning at every step fell below the no-subgoal baseline.</p><div class="profile-links"><a href="https://arxiv.org/abs/2606.03741">Paper on arXiv</a><a href="/research/">Earlier research notes</a><a href="https://github.com/Ayushichadha/scout">Code</a></div><details><summary>Methods & ablations</summary><p>The recurrent mechanism uses L2-normalised directional subgoals, modulated by a learned commitment gate and injected into worker hidden-state updates. Cosine alignment trains worker displacement over each commitment window.</p><p>Full, no-subgoal, and random-direction experiments isolated interference from learned directional content rather than added capacity or auxiliary loss. Further sweeps examined alignment weight, normalisation, and commitment gating.</p></details></article>
-<article class="entry"><div class="research-label">Adaptive revision · Meta-control</div><h3>Beyond the Clock: Measuring the Value of Adaptive Revision</h3><p class="meta">Sole author · May 2026–present<br>Under review · NeurIPS 2026 Workshop on Responsible Use of Meta-Agents</p><p>Can a controller use a reasoner’s internal trajectory to decide when to replace a latent commitment? I compare learned, state-conditioned revision policies with strong fixed schedules under matched compute.</p><p>The learned controllers did not beat the best forced timing policy on their own frozen checkpoints. Enumerating all two-revision schedules showed that the best fixed schedule captured 71% of the gain from uniform-random timing to a per-episode oracle.</p><div class="profile-links"><a href="https://arxiv.org/abs/2609.00874">Paper on arXiv</a></div><details><summary>Methods & findings</summary><p>I trained controllers across three precommitted seeds with fixed M=8 compute and calibrated intervention budgets. The policies ranged from near-fixed early timing to high-entropy, state-conditioned schedules.</p><p>Changing only the second revision position raised seed-0 episode-averaged token accuracy from 46.70% to 48.75%. Matched PERSIST/REPLAN counterfactuals separated predictive scores, adaptive decisions, and actual decision value.</p><p>Remaining adaptive headroom was 0.135 percentage points in micro accuracy, concentrated in 7.6% of episodes. These results distinguish the ability to adapt from the value of adapting.</p></details></article>
-<article class="entry"><h3>Research service</h3><p class="meta">2026</p><p>Reviewer for CompLearn at ICML 2026; invited reviewer for the NeurIPS 2026 Workshop on Responsible Use of Meta-Agents.</p></article></section>
-<section class="section" id="experience"><div class="section-heading"><h2>Experience</h2><span class="section-no">02</span></div>
-<article class="entry"><div class="entry-head"><h3>Propero Consulting</h3><span class="date">Aug 2022–Dec 2024</span></div><p class="meta">Software Developer · ML & Applied AI Engineering · Pune, India</p><p>I led the architecture and development of ShopiBot, a domain-specific AI assistant for Shopify developers building stores for partners and clients. It supported technical questions, requirements understanding, and implementation guidance.</p><dl class="detail-grid"><dt>Retrieval</dt><dd>Led technical development using LangChain, dense retrieval, RAPTOR, and corrective/adaptive RAG. Reduced latency from 53 to 20 seconds, improved top-k precision by 28%, and reduced hallucinations by 35%.</dd><dt>Agent workflows</dt><dd>Developed Active-RAG workflows combining knowledge graphs, LangChain planners, multi-tool reasoning, and self-reflection. Later experimented with Sema4.ai and LLM tool calling for domain-aware developer workflows.</dd><dt>Evaluation</dt><dd>Deployed an anomaly-aware checkout-flow tester using DOM-tree pattern mining and RL-style feedback, catching 92% of regressions before release. Integrated LangSmith telemetry for continuous evaluation.</dd></dl><details><summary>Multimodal systems & early engineering work</summary><p>Built an image-generation system using CLIP-guided prompt augmentation, a DreamBooth fine-tuned Stable Diffusion model, and controllable image-to-image translation.</p><p>During my initial internship, I built a Page-Speed Analyzer MVP and automated testing modules with Robocorp RPA and LangChain, and earned Robocorp Level I, II, and III certifications.</p></details></article>
-<article class="entry"><div class="entry-head"><h3>Unify</h3><span class="date">Jul–Sep 2024</span></div><p class="meta">LLM Engineer Contributor · London, UK · YC-backed</p><p>Selected for Unify’s contributor programme, collaborating with the core team on a community-built unified LLM query router across model providers.</p></article></section>
-<section class="section" id="projects"><div class="section-heading"><h2>Selected engineering</h2><span class="section-no">03</span></div>
-<article class="entry"><div class="entry-head"><h3>Instinct</h3><span class="date">2026–present</span></div><p class="meta">Saint · In development</p><p>I’m developing an evaluation tool for agents and reasoning systems to assess when to persist, retry, or re-plan—and whether those decisions improve final outcomes. The work builds on my research into subgoal persistence and supervisory decision value.</p></article>
-<article class="entry"><div class="entry-head"><h3>LLMs in C and CUDA</h3><span class="date">2025</span></div><p>Implemented matrix multiplication, GELU, and layer normalisation in C and CUDA to study the operations underlying transformer models.</p></article>
-<article class="entry"><div class="entry-head"><h3>Autograd engine & GPT from scratch</h3><span class="date">2024</span></div><p>Built a minimal autograd engine, trained bigram and trigram models, and implemented a GPT-2-style language model with a custom tokeniser.</p></article></section>
-<section class="section" id="writing"><div class="section-heading"><h2>Writing</h2><span class="section-no">04</span></div><p>Longer essays are forthcoming. Earlier notes explore reasoning, cognition, and the relationship between human and artificial intelligence.</p><div class="profile-links"><a href="https://x.com/AyushiChadha24/status/1945192888360690175">Fast intuition & slow deliberation</a><a href="https://x.com/AyushiChadha24/status/1951731429609455742">An equivalent of sleep in AI?</a></div></section>
-<section class="section" id="cv"><div class="section-heading"><h2>Background & contact</h2><span class="section-no">05</span></div><article class="entry"><h3>Northeastern University, Boston</h3><p class="meta">MS, Artificial Intelligence · Machine Learning concentration · Fall 2026 admission</p><p>Admitted with the International Impact Award (30% tuition). Did not enroll; prioritized full-time research.</p></article><article class="entry"><h3>G.B. Pant University, Pantnagar</h3><p class="meta">B.Tech, Electrical Engineering · 2017–2021</p><p>73.2% · First Division</p></article><p>For research and engineering conversations, reach me at <a href="mailto:ayushichadha48@gmail.com">ayushichadha48@gmail.com</a>.</p><div class="profile-links"><a href="/assets/Ayushi_Chadha_CV.pdf">Curriculum vitae (PDF)</a><a href="https://github.com/Ayushichadha">GitHub</a><a href="https://www.linkedin.com/in/ayushi-chadha-ai">LinkedIn</a></div></section>
-<footer><span>Ayushi Chadha</span><span>Research & engineering</span></footer>
-</main></div><script>
-const links=[...document.querySelectorAll('.nav a')];const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>{const active=link.hash==='#'+entry.target.id;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}})},{rootMargin:'-10% 0px -65% 0px',threshold:0});document.querySelectorAll('main section').forEach(section=>observer.observe(section));
-</script></body></html>
+<body>
+  <header class="site-header home-header">
+    <div class="wrap header-inner">
+      <nav aria-label="Primary navigation">
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#programs">Programs</a>
+        <a href="#education">Education</a>
+        <a href="#news">News</a>
+        <a href="{{ '/reading/' | relative_url }}">Selected reading</a>
+        <a href="#writing">Writing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="intro" aria-labelledby="intro-title">
+      <h1 id="intro-title">Ayushi Chadha</h1>
+      <p class="intro-lead">I work on <strong>reasoning and agentic systems</strong>, with a particular interest in latent reasoning in hierarchical recurrent models: how internal computation develops across <strong>recurrent depth</strong>, how medium-horizon intent can be represented in latent space, and when that intent should persist or be revised.</p>
+      <p>My recent work approaches these questions through hierarchical control and adaptive computation. My first paper studies persistent directional subgoals inside a recurrent latent reasoner. My second studies learned supervisory control and asks whether an apparently adaptive internal signal actually produces useful decisions.</p>
+      <p>Before this work, I spent several years in <strong>machine learning and applied AI at Propero</strong>, where I led the development of ShopiBot, a domain-specific AI system, and worked across retrieval, agentic workflows, evaluation, and ML system design.</p>
+      <p>I am interested in research and engineering work around <strong>reasoning, adaptive computation, agents, and model-facing systems</strong>.</p>
+      <p class="direct-links"><a href="mailto:ayushichadha48@gmail.com">Email</a><a href="{{ '/assets/Ayushi_Chadha_CV.pdf' | relative_url }}">CV</a><a href="https://github.com/Ayushichadha">GitHub</a><a href="https://www.linkedin.com/in/ayushi-chadha-ai">LinkedIn</a><a href="https://x.com/AyushiChadha24">X</a><a href="https://substack.com/@ayushi25">Substack</a><a href="{{ '/reading/' | relative_url }}">Selected reading</a></p>
+    </section>
+
+    <section id="research" aria-labelledby="research-title">
+      <h2 id="research-title">Selected Research</h2>
+      <article class="entry research-entry">
+        <h3>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</h3>
+        <p class="meta"><strong>Accepted · 2nd Workshop on Compositional Learning at ICML 2026 · Seoul, South Korea · Sole author</strong></p>
+        <p>This work studies <strong>latent-space reasoning at recurrent depth</strong> through the problem of temporal abstraction.</p>
+        <p><em>How long should a latent reasoner commit to an intent before revising it?</em></p>
+        <p>I extend the Hierarchical Reasoning Model with a manager-worker interface in which a slow high-level module emits a <strong>directional subgoal in latent space</strong>. The subgoal represents <strong>medium-horizon intent</strong> and persists across multiple low-level recurrent steps, steering the worker's hidden-state trajectory without specifying an absolute target.</p>
+        <p>The central variable is <strong>subgoal persistence</strong>: how long the directional intent remains active before the model re-plans. The results show that intent must persist across enough computational steps for longer-horizon structure to form, while remaining flexible enough to be revised. More frequent re-planning is not necessarily more adaptive.</p>
+        <p class="entry-links"><a href="https://arxiv.org/abs/2606.03741">Paper</a><a href="https://github.com/Ayushichadha/scout">Code</a></p>
+      </article>
+
+      <article class="entry research-entry">
+        <h3>Beyond the Clock: Measuring the Value of Adaptive Revision</h3>
+        <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
+        <p>This work studies <strong>learned supervisory control</strong> in hierarchical latent reasoning. When a controller decides whether an internal commitment should persist or be revised, a state-dependent score can look like evidence that the system has learned when to intervene.</p>
+        <p><em>State dependence, behavioral adaptation, and decision value are different properties.</em></p>
+        <p>A supervisory score can vary with the model's internal state without meaningfully changing its decisions, and a policy can make different decisions across states without improving the final outcome. The paper separates these three levels rather than treating them as equivalent forms of adaptation.</p>
+        <p>A second question is <em>whether adaptation is worth learning at all.</em> If a strong non-adaptive policy already captures most of the available value, the more useful control problem may be to learn <strong>when to deviate from a strong prior</strong>, rather than making every decision fully adaptive.</p>
+        <p>This reframes supervisory control around <strong>decision value</strong>: how much improvement is actually available from changing the decision, and whether a learned controller can capture it.</p>
+        <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a><span>Code to be released</span></p>
+      </article>
+      <hr class="section-end">
+      <p class="closing-line"><em>Together, these projects study a broader problem in reasoning systems: <strong>how computation should be structured over time, when internal intent should change, and how to tell whether learned control over those decisions is genuinely useful.</strong></em></p>
+    </section>
+
+    <section id="saint" aria-labelledby="saint-title">
+      <h2 id="saint-title">Saint</h2>
+      <p class="meta"><strong>Ongoing</strong></p>
+      <p>Exploring how the questions in my research translate to agentic systems, particularly <strong>whether another attempt, repair, investigation, or reasoning step is actually worth taking.</strong></p>
+    </section>
+
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <article class="entry experience-entry">
+        <h3>Propero</h3>
+        <p class="role"><strong>Software Developer · Machine Learning &amp; Applied AI</strong><br>Aug 2022 to Dec 2024</p>
+        <p>I worked across machine learning and applied AI, eventually leading the design and technical development of <strong>ShopiBot</strong>, a domain-specific AI system.</p>
+        <p>My work covered dense retrieval, RAPTOR, corrective and adaptive retrieval, query analysis and routing, vector-database infrastructure, agentic workflows, automated evaluation and testing, and hallucination mitigation. I also worked on tool-calling systems using LangChain and later Sema4AI and Robocorp as the system evolved.</p>
+        <p>Beyond implementation, I worked directly with the CEO on technical direction and product priorities, ran internal technical sessions, and built demos for prospective partnerships. Additional engineers later joined the project for deployment and management while I continued to own the core ML and applied-AI architecture.</p>
+      </article>
+      <article class="entry experience-entry">
+        <h3>Unify</h3>
+        <p class="role"><strong>Contributor Program</strong><br>Jul 2024</p>
+        <p>Selected for the contributor program at Unify, a London-based Y Combinator-backed company working on model-routing infrastructure. The work connected with experiments I was already doing around query analysis and routing requests across model and retrieval pipelines.</p>
+      </article>
+    </section>
+
+    <section id="programs" aria-labelledby="programs-title">
+      <h2 id="programs-title">Selected Programs</h2>
+      <article class="entry"><h3>MATS 2026</h3><p class="role"><strong>Empirical Research Track</strong></p><p>Advanced through the <strong>Research Taste Test</strong> and <strong>Applied AI Assessment</strong>, then progressed to a subsequent written application stage for a Redwood Research stream.</p></article>
+      <article class="entry"><h3>Anthropic Fellows Program 2025</h3><p>Advanced to the <strong>technical assessment stage</strong> of the Anthropic Fellows Program. The program stated that its cohort would include 32 fellows.</p></article>
+    </section>
+
+    <section id="service" aria-labelledby="service-title">
+      <h2 id="service-title">Research Service</h2>
+      <p><strong>Invited Reviewer</strong><br>NeurIPS 2026 Workshop on Responsible Use of Meta-Agents</p>
+      <p><strong>Reviewer</strong><br>2nd Workshop on Compositional Learning at ICML 2026</p>
+    </section>
+
+    <section id="education" aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <article class="entry"><h3>Northeastern University</h3><p class="role"><strong>MS in Artificial Intelligence · Machine Learning concentration</strong><br>Fall 2026 admission</p><p>Admitted with the <strong>International Impact Award</strong>, covering 30% of tuition.</p><p>Chose not to enroll at this time and continued my <strong>solo research</strong>.</p></article>
+      <article class="entry"><h3>G. B. Pant University of Agriculture and Technology</h3><p class="role"><strong>B.Tech in Electrical Engineering · 2017 to 2021</strong></p><p>First Division.</p><p><strong>Relevant coursework:</strong> Engineering Mathematics I, II, III; Physics I, II; Probability, Statistics &amp; Queuing Models; Introduction to Computers &amp; Programming; Computer Methods in Electrical Engineering; Digital Logic &amp; Circuits; Microprocessors; Circuit Theory; Network Analysis &amp; Synthesis; Control Systems; Advanced Control Systems.</p></article>
+    </section>
+
+    <section id="news" aria-labelledby="news-title">
+      <h2 id="news-title">News</h2>
+      <div class="timeline">
+        <div class="timeline-row"><time>Sep 2026</time><p>Invited to give an oral presentation at the <strong>2nd Global Summit on Innovating the Future of Artificial Intelligence (Inno-AI) 2027</strong> in Kuala Lumpur, Malaysia.</p></div>
+        <div class="timeline-row"><time>Sep 2026</time><p>Released <em>Beyond the Clock: Measuring the Value of Adaptive Revision</em> as a preprint.</p></div>
+        <div class="timeline-row"><time>Sep 2026</time><p>Invited to review for the NeurIPS 2026 Workshop on Responsible Use of Meta-Agents.</p></div>
+        <div class="timeline-row"><time>Jun 2026</time><p>Advanced through the Research Taste Test and Applied AI Assessment for the MATS 2026 Empirical Research Track.</p></div>
+        <div class="timeline-row"><time>Jun 2026</time><p><em>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</em> accepted at the 2nd Workshop on Compositional Learning at ICML 2026 in Seoul.</p></div>
+        <div class="timeline-row"><time>May 2026</time><p>Served as a reviewer for the 2nd Workshop on Compositional Learning at ICML 2026.</p></div>
+        <div class="timeline-row"><time>Sep 2025</time><p>Advanced to the technical assessment stage of the Anthropic Fellows Program.</p></div>
+        <div class="timeline-row"><time>Jan 2025</time><p>Began focused work on recurrent and latent reasoning, adaptive computation, and hierarchical control.</p></div>
+      </div>
+    </section>
+
+    <section id="writing" aria-labelledby="writing-title">
+      <h2 id="writing-title">Writing</h2>
+      <p>I write longer notes and essays on research, reasoning systems, and the ideas shaping my work on Substack.</p>
+      <p class="direct-links"><a href="https://substack.com/@ayushi25">Substack</a><a href="{{ '/reading/' | relative_url }}">Selected reading</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap site-footer"><p>For research, engineering, or collaboration conversations: <a href="mailto:ayushichadha48@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/ayushi-chadha-ai">LinkedIn</a> · <a href="https://x.com/AyushiChadha24">X</a> · <a href="https://github.com/Ayushichadha">GitHub</a></p><p>© 2026 Ayushi Chadha</p></footer>
+</body>
+</html>
