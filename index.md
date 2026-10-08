@@ -74,7 +74,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       </article>
 
       <article class="entry research-entry">
-        <h3>Beyond the Clock: Measuring the Value of Adaptive Revision</h3>
+        <h3>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</h3>
         <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
         <p>This work studies <strong>learned supervisory control</strong> in hierarchical latent reasoning. When a controller decides whether an internal commitment should persist or be revised, a state-dependent score can look like evidence that the system has learned when to intervene.</p>
         <p><em>State dependence, behavioral adaptation, and decision value are different properties.</em></p>
@@ -131,7 +131,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <h2 id="news-title">News</h2>
       <div class="timeline">
         <div class="timeline-row"><time>Sep 2026</time><p>Invited to give an oral presentation at the <strong>2nd Global Summit on Innovating the Future of Artificial Intelligence (Inno-AI) 2027</strong> in Kuala Lumpur, Malaysia.</p></div>
-        <div class="timeline-row"><time>Sep 2026</time><p>Released <em>Beyond the Clock: Measuring the Value of Adaptive Revision</em> as a preprint.</p></div>
+        <div class="timeline-row"><time>Sep 2026</time><p>Released <em>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</em> as a preprint.</p></div>
         <div class="timeline-row"><time>Sep 2026</time><p>Invited to review for the NeurIPS 2026 Workshop on Responsible Use of Meta-Agents.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p>Advanced through the Research Taste Test and Applied AI Assessment for the MATS 2026 Empirical Research Track.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p><em>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</em> accepted at the 2nd Workshop on Compositional Learning at ICML 2026 in Seoul.</p></div>
