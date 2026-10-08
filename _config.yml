@@ -21,7 +21,6 @@ kramdown:
 header_pages:
   - index.md
   - research.md
-  - about.md
 
 # Optional: social links (fill if you want)
 github_username: Ayushichadha
