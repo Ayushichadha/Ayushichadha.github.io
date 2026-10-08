@@ -74,7 +74,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       </article>
 
       <article class="entry research-entry">
-        <h3>Beyond the Clock: Measuring the Value of Adaptive Revision</h3>
+        <h3>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</h3>
         <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
         <p>This work studies <strong>learned supervisory control</strong> in hierarchical latent reasoning. When a controller decides whether an internal commitment should persist or be revised, a state-dependent score can look like evidence that the system has learned when to intervene.</p>
         <p><em>State dependence, behavioral adaptation, and decision value are different properties.</em></p>
@@ -123,7 +123,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
 
     <section id="education" aria-labelledby="education-title">
       <h2 id="education-title">Education</h2>
-      <article class="entry"><h3>Northeastern University</h3><p class="role"><strong>MS in Artificial Intelligence · Machine Learning concentration</strong><br>Fall 2026 admission</p><p>Admitted with the <strong>International Impact Award</strong>, covering 30% of tuition.</p><p>Chose not to enroll at this time and continued my <strong>solo research</strong>.</p></article>
+      <article class="entry"><h3>Northeastern University</h3><p class="role"><strong>MS in Artificial Intelligence · Machine Learning concentration</strong><br>Fall 2026 admission · Spring 2027 start option</p><p>Admitted with the <strong>International Impact Award</strong>, covering 30% of tuition.</p><p>Chose not to enroll at this time and continued my <strong>solo research</strong>.</p></article>
       <article class="entry"><h3>G. B. Pant University of Agriculture and Technology</h3><p class="role"><strong>B.Tech in Electrical Engineering · 2017 to 2021</strong></p><p>First Division.</p><p><strong>Relevant coursework:</strong> Engineering Mathematics I, II, III; Physics I, II; Probability, Statistics &amp; Queuing Models; Introduction to Computers &amp; Programming; Computer Methods in Electrical Engineering; Digital Logic &amp; Circuits; Microprocessors; Circuit Theory; Network Analysis &amp; Synthesis; Control Systems; Advanced Control Systems.</p></article>
     </section>
 
@@ -131,7 +131,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <h2 id="news-title">News</h2>
       <div class="timeline">
         <div class="timeline-row"><time>Sep 2026</time><p>Invited to give an oral presentation at the <strong>2nd Global Summit on Innovating the Future of Artificial Intelligence (Inno-AI) 2027</strong> in Kuala Lumpur, Malaysia.</p></div>
-        <div class="timeline-row"><time>Sep 2026</time><p>Released <em>Beyond the Clock: Measuring the Value of Adaptive Revision</em> as a preprint.</p></div>
+        <div class="timeline-row"><time>Sep 2026</time><p>Released <em>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</em> as a preprint.</p></div>
         <div class="timeline-row"><time>Sep 2026</time><p>Invited to review for the NeurIPS 2026 Workshop on Responsible Use of Meta-Agents.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p>Advanced through the Research Taste Test and Applied AI Assessment for the MATS 2026 Empirical Research Track.</p></div>
         <div class="timeline-row"><time>Jun 2026</time><p><em>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</em> accepted at the 2nd Workshop on Compositional Learning at ICML 2026 in Seoul.</p></div>
