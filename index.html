@@ -65,12 +65,16 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <h2 id="research-title">Selected Research</h2>
       <article class="entry research-entry">
         <h3>When to Re-Plan: Subgoal Persistence in Hierarchical Latent Reasoning</h3>
-        <p class="meta conference-line"><strong>Accepted</strong> · 2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026 · Seoul, South Korea · Sole author</p>
+        <div class="venue-block">
+          <p class="venue-status"><strong>Accepted paper</strong><span>Sole author</span></p>
+          <p class="venue-name"><a href="https://compositional-learning.github.io/">2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents</a> at <strong>ICML 2026</strong></p>
+          <p class="venue-detail">Seoul, South Korea · July 11, 2026 · Listed in Poster Session 1 on the official ICML schedule · Organized by researchers from IBM Research, OpenAI, Harvard, ETH Zürich, the University of Amsterdam, and Zhejiang University.</p>
+        </div>
         <p>This work studies <strong>latent-space reasoning at recurrent depth</strong> through the problem of temporal abstraction.</p>
         <p><em>How long should a latent reasoner commit to an intent before revising it?</em></p>
         <p>I extend the Hierarchical Reasoning Model with a manager-worker interface in which a slow high-level module emits a <strong>directional subgoal in latent space</strong>. The subgoal represents <strong>medium-horizon intent</strong> and persists across multiple low-level recurrent steps, steering the worker's hidden-state trajectory without specifying an absolute target.</p>
         <p>The central variable is <strong>subgoal persistence</strong>: how long the directional intent remains active before the model re-plans. The results show that intent must persist across enough computational steps for longer-horizon structure to form, while remaining flexible enough to be revised. More frequent re-planning is not necessarily more adaptive.</p>
-        <p class="entry-links"><a href="https://arxiv.org/abs/2606.03741">Paper</a><a href="https://github.com/Ayushichadha/scout">Code</a><a href="https://compositional-learning.github.io/">Workshop</a><a href="https://icml.cc/virtual/2026/workshop/54096">ICML schedule</a></p>
+        <p class="entry-links primary-links"><a href="https://arxiv.org/abs/2606.03741">Paper</a><a href="https://github.com/Ayushichadha/scout">Code</a><a href="https://compositional-learning.github.io/">CompLearn workshop</a><a href="https://icml.cc/virtual/2026/workshop/54096">Official ICML poster schedule</a></p>
       </article>
 
       <article class="entry research-entry">
@@ -98,9 +102,13 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <article class="entry experience-entry">
         <h3>Propero</h3>
         <p class="role"><strong>Software Developer · Machine Learning &amp; Applied AI</strong><br>Aug 2022 to Dec 2024</p>
-        <p>I worked across machine learning and applied AI, eventually leading the design and technical development of <strong>ShopiBot</strong>, a domain-specific AI system.</p>
-        <p>My work covered dense retrieval, RAPTOR, corrective and adaptive retrieval, query analysis and routing, vector-database infrastructure, agentic workflows, automated evaluation and testing, and hallucination mitigation. I also worked on tool-calling systems using LangChain and later Sema4AI and Robocorp as the system evolved.</p>
-        <p>Beyond implementation, I worked directly with the CEO on technical direction and product priorities, ran internal technical sessions, and built demos for prospective partnerships. Additional engineers later joined the project for deployment and management while I continued to own the core ML and applied-AI architecture.</p>
+        <p>Owned the architecture and development of <strong>ShopiBot</strong>, a domain-specific AI system for Shopify developers that supported technical question answering, requirements understanding, implementation guidance, and agentic workflows.</p>
+        <ul class="compact-list">
+          <li>Built retrieval and reasoning pipelines using dense retrieval, RAPTOR, corrective and adaptive RAG, query analysis, vector-database sharding, and prompt and embedding caching. This reduced end-to-end latency from 53 seconds to 20 seconds, improved top-k retrieval precision by 28%, and reduced hallucinations by 35%.</li>
+          <li>Developed agentic workflows using knowledge graphs, LangChain planners, multi-tool reasoning, and self-reflection, then explored Sema4AI, Robocorp, and tool calling for domain-aware developer automation.</li>
+          <li>Built multimodal generation and automated evaluation systems, including an anomaly-aware checkout-flow tester that caught 92% of regressions before release.</li>
+        </ul>
+        <p>Worked directly with the CEO on technical direction and product priorities, led internal technical sessions, and built demos for prospective partnerships while retaining ownership of the core ML and applied-AI architecture.</p>
       </article>
       <article class="entry experience-entry">
         <h3>Unify</h3>
@@ -117,8 +125,16 @@ description: Researcher and engineer working on reasoning and agentic systems, l
 
     <section id="service" aria-labelledby="service-title">
       <h2 id="service-title">Research Service</h2>
-      <p class="conference-item"><strong>Invited Reviewer</strong><br><a href="https://meta-agents-workshop.github.io/">NeurIPS 2026 Workshop on Responsible Use of Meta-Agents</a></p>
-      <p class="conference-item"><strong>Peer reviewer</strong><br><a href="https://compositional-learning.github.io/">2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents @ ICML 2026</a></p>
+      <article class="service-entry conference-item">
+        <p class="service-role"><strong>Invited reviewer</strong> · NeurIPS 2026 · Sydney, Australia</p>
+        <h3><a href="https://meta-agents-workshop.github.io/">Workshop on Responsible Use of Meta-Agents: Managing Agents that Manage Agents</a></h3>
+        <p>Nominated to review research on supervisory and meta-agent systems: agents that monitor, coordinate, evaluate, or manage other AI agents. The workshop is organized and advised by researchers from Stanford, Carnegie Mellon, Google DeepMind, and Northeastern, including Christopher D. Manning.</p>
+      </article>
+      <article class="service-entry conference-item">
+        <p class="service-role"><strong>Peer reviewer</strong> · ICML 2026 · Seoul, South Korea</p>
+        <h3><a href="https://compositional-learning.github.io/">2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents</a></h3>
+        <p>Reviewed work on how learning systems acquire, represent, and combine reusable structure for generalization and reasoning across foundation models and agents.</p>
+      </article>
     </section>
 
     <section id="news" aria-labelledby="news-title">

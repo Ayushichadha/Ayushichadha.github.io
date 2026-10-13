@@ -43,6 +43,22 @@ h3{font-size:16px;line-height:1.45}
 .entry-links span{color:#747474}
 .conference-line{max-width:720px;margin:7px 0 16px;color:#40566b;line-height:1.55}
 .conference-item strong{color:#344e67;font-weight:600}
+.venue-block{max-width:720px;margin:10px 0 20px;padding:14px 17px;border-left:3px solid #718ba4;background:#f6f8fa}
+.venue-block p{margin:0}
+.venue-status{display:flex;gap:9px 18px;align-items:center;flex-wrap:wrap;color:#344e67;font-size:13px;letter-spacing:.01em}
+.venue-status strong{text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.venue-status span{color:#555}
+.venue-name{font-size:15px;line-height:1.5;padding-top:4px}
+.venue-name a{font-weight:600;text-decoration-color:#879aaa}
+.venue-detail{padding-top:5px;color:#666;font-size:12.5px;line-height:1.55}
+.primary-links a{font-weight:600}
+.compact-list{max-width:710px;margin:4px 0 17px;padding-left:19px}
+.compact-list li{margin-bottom:9px;padding-left:3px}
+.service-entry{max-width:720px}
+.service-entry+.service-entry{margin-top:25px}
+.service-entry h3{margin-bottom:7px}
+.service-entry p:last-child{margin-bottom:0}
+.service-role{margin:0 0 5px;color:#566a7d;font-size:12.5px;text-transform:none}
 main.wrap>section:not(.intro){padding-top:29px;padding-bottom:35px}
 .entry{max-width:720px}
 .entry+.entry{margin-top:27px}
