@@ -18,7 +18,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ayushi Chadha">
   <meta name="twitter:description" content="Research on latent reasoning, hierarchical control, and adaptive computation.">
-  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261016h">
+  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261016i">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,24 +74,32 @@ description: Researcher and engineer working on reasoning and agentic systems, l
           <p class="venue-name"><a href="https://compositional-learning.github.io/">2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents</a> at <strong>ICML 2026</strong></p>
           <p class="venue-detail">Seoul, South Korea · July 11, 2026 · Listed in Poster Session 1 on the official ICML schedule · Organized by researchers from IBM Research, OpenAI, Harvard, ETH Zürich, the University of Amsterdam, and Zhejiang University.</p>
         </div>
-        <p>This paper asks how long a hierarchical latent reasoner should preserve an intent before revising it, extending the Hierarchical Reasoning Model with a manager-worker interface that emits persistent directional subgoals in latent space.</p>
-        <p>It finds that subgoals must persist long enough for longer-horizon structure to form while remaining revisable, so more frequent re-planning is not necessarily more adaptive.</p>
-        <figure class="research-figure">
-          <img src="{{ '/assets/images/subgoal-hrm-architecture.webp' | relative_url }}" alt="Subgoal-Augmented HRM architecture and persistence timeline comparing manager periods P equals 1, 3, and 8" loading="lazy">
-          <figcaption>Subgoal-Augmented HRM: a high-level manager emits a directional latent subgoal that persists across multiple worker steps. The timeline illustrates the stability-adaptivity tradeoff studied in the paper.</figcaption>
-        </figure>
+        <div class="research-summary">
+          <div class="research-copy">
+            <p>This paper asks how long a hierarchical latent reasoner should preserve an intent before revising it, extending the Hierarchical Reasoning Model with a manager-worker interface that emits persistent directional subgoals in latent space.</p>
+            <p>It finds that subgoals must persist long enough for longer-horizon structure to form while remaining revisable, so more frequent re-planning is not necessarily more adaptive.</p>
+          </div>
+          <figure class="research-figure">
+            <img src="{{ '/assets/images/subgoal-hrm-architecture.webp' | relative_url }}" alt="Subgoal-Augmented HRM architecture and persistence timeline comparing manager periods P equals 1, 3, and 8" loading="lazy">
+            <figcaption>Subgoal-Augmented HRM: a directional latent subgoal persists across multiple worker steps.</figcaption>
+          </figure>
+        </div>
         <p class="entry-links primary-links"><a href="https://arxiv.org/abs/2606.03741">Paper</a><a href="https://github.com/Ayushichadha/scout">Code</a><a href="https://compositional-learning.github.io/">CompLearn workshop</a><a href="https://icml.cc/virtual/2026/workshop/54096">Official ICML poster schedule</a></p>
       </article>
 
       <article class="entry research-entry">
         <h3>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</h3>
         <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
-        <p>This paper asks whether a learned supervisor can use a reasoner's internal state to decide when an active commitment should persist or be revised.</p>
-        <p>It separates state dependence, behavioral adaptation, and decision value, finding that an apparently adaptive score need not produce useful interventions while strong fixed policies can capture much of the available value.</p>
-        <figure class="research-figure">
-          <img src="{{ '/assets/images/supervisory-timing-architecture.webp' | relative_url }}" alt="Manager-worker timing architecture showing retain or replace decisions between recurrent worker passes" loading="lazy">
-          <figcaption>Manager-worker timing: the supervisor observes the post-pass state and decides whether the active commitment should persist or be replaced for the next worker pass.</figcaption>
-        </figure>
+        <div class="research-summary">
+          <div class="research-copy">
+            <p>This paper asks whether a learned supervisor can use a reasoner's internal state to decide when an active commitment should persist or be revised.</p>
+            <p>It separates state dependence, behavioral adaptation, and decision value, finding that an apparently adaptive score need not produce useful interventions while strong fixed policies can capture much of the available value.</p>
+          </div>
+          <figure class="research-figure">
+            <img src="{{ '/assets/images/supervisory-timing-architecture.webp' | relative_url }}" alt="Manager-worker timing architecture showing retain or replace decisions between recurrent worker passes" loading="lazy">
+            <figcaption>Manager-worker timing: the supervisor decides whether the active commitment should persist or be replaced.</figcaption>
+          </figure>
+        </div>
         <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a><span>Code to be released</span></p>
       </article>
       <hr class="section-end">
