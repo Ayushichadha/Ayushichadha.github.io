@@ -90,6 +90,10 @@ description: Researcher and engineer working on reasoning and agentic systems, l
         <h3>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</h3>
         <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
         <p>This work studies <strong>learned supervisory control</strong> in hierarchical latent reasoning. When a controller decides whether an internal commitment should persist or be revised, a state-dependent score can look like evidence that the system has learned when to intervene.</p>
+        <figure class="research-figure">
+          <img src="{{ '/assets/images/supervisory-timing-architecture.webp' | relative_url }}" alt="Manager-worker timing architecture showing retain or replace decisions between recurrent worker passes" loading="lazy">
+          <figcaption>Manager-worker timing: the supervisor observes the post-pass state and decides whether the active commitment should persist or be replaced for the next worker pass.</figcaption>
+        </figure>
         <p><em>State dependence, behavioral adaptation, and decision value are different properties.</em></p>
         <p>A supervisory score can vary with the model's internal state without meaningfully changing its decisions, and a policy can make different decisions across states without improving the final outcome. The paper separates these three levels rather than treating them as equivalent forms of adaptation.</p>
         <p>A second question is <em>whether adaptation is worth learning at all.</em> If a strong non-adaptive policy already captures most of the available value, the more useful control problem may be to learn <strong>when to deviate from a strong prior</strong>, rather than making every decision fully adaptive.</p>
