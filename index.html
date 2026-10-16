@@ -18,7 +18,7 @@ description: Researcher and engineer working on reasoning and agentic systems, l
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ayushi Chadha">
   <meta name="twitter:description" content="Research on latent reasoning, hierarchical control, and adaptive computation.">
-  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261016f">
+  <link rel="stylesheet" href="{{ '/assets/portfolio.css' | relative_url }}?v=20261016j">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,13 +55,13 @@ description: Researcher and engineer working on reasoning and agentic systems, l
       <div class="intro-grid">
         <div>
           <h1 id="intro-title">Ayushi Chadha</h1>
-          <p class="intro-lead">I work on <strong>reasoning and agentic systems</strong>, with a particular interest in latent reasoning in hierarchical recurrent models: how internal computation develops across <strong>recurrent depth</strong>, how medium-horizon intent can be represented in latent space, and when that intent should persist or be revised.</p>
+          <p class="intro-lead">I'm Ayushi. I work on AI research and engineering, with a particular interest in how intelligent systems reason, make decisions, and decide when to change course.</p>
         </div>
         <figure class="intro-portrait"><img src="{{ '/assets/images/ayushi-portrait.webp' | relative_url }}?v=20261016c" alt="Portrait of Ayushi Chadha"></figure>
       </div>
-      <p>My recent work approaches these questions through hierarchical control and adaptive computation. My first paper studies persistent directional subgoals inside a recurrent latent reasoner. My second studies learned supervisory control and asks whether an apparently adaptive internal signal actually produces useful decisions.</p>
-      <p>Before this work, I spent some time in <strong>machine learning and applied AI at Propero</strong>, where I led the development of ShopiBot, a domain-specific AI system, and worked across retrieval, agentic workflows, evaluation, and ML system design.</p>
-      <p>I am interested in research and engineering work around <strong>reasoning, adaptive computation, agents, and model-facing systems</strong>.</p>
+      <p>My recent research explores a question I keep coming back to: when should a system continue reasoning, and when is another attempt no longer worth it? I've studied this through hierarchical latent reasoning and learned supervisory decisions, with my first paper accepted at the ICML 2026 Workshop on Compositional Learning. I'm now exploring how to make the allocation of reasoning and computation more adaptive, including through Saint, an early-stage project.</p>
+      <p>Before this, I built applied AI systems at Propero, working on retrieval, agentic workflows, and evaluation. I enjoy moving between understanding how these systems work and building things that put those ideas to the test.</p>
+      <p>Outside of work, I write poetry, love music, and occasionally dance. I'm fascinated by the intersection of technology and art, especially immersive installations and digital art museums. Lately, I've also been reading more nonfiction, including Maxwell Maltz's <em>Psycho-Cybernetics</em>. Music and poetry have always felt closely connected to me, perhaps because both can express things that are difficult to put into ordinary words.</p>
       <p class="direct-links"><a href="mailto:ayushichadha48@gmail.com">Email</a><a href="{{ '/assets/Ayushi_Chadha_CV.pdf' | relative_url }}">CV</a><a href="https://github.com/Ayushichadha">GitHub</a><a href="https://www.linkedin.com/in/ayushi-chadha-ai">LinkedIn</a><a href="https://x.com/AyushiChadha24">X</a><a href="https://substack.com/@ayushi25">Substack</a><a href="{{ '/reading/' | relative_url }}">Selected reading</a></p>
     </section>
 
@@ -74,29 +74,32 @@ description: Researcher and engineer working on reasoning and agentic systems, l
           <p class="venue-name"><a href="https://compositional-learning.github.io/">2nd Workshop on Compositional Learning: Safety, Interpretability, and Agents</a> at <strong>ICML 2026</strong></p>
           <p class="venue-detail">Seoul, South Korea · July 11, 2026 · Listed in Poster Session 1 on the official ICML schedule · Organized by researchers from IBM Research, OpenAI, Harvard, ETH Zürich, the University of Amsterdam, and Zhejiang University.</p>
         </div>
-        <p>This work studies <strong>latent-space reasoning at recurrent depth</strong> through the problem of temporal abstraction.</p>
-        <p><em>How long should a latent reasoner commit to an intent before revising it?</em></p>
-        <p>I extend the Hierarchical Reasoning Model with a manager-worker interface in which a slow high-level module emits a <strong>directional subgoal in latent space</strong>. The subgoal represents <strong>medium-horizon intent</strong> and persists across multiple low-level recurrent steps, steering the worker's hidden-state trajectory without specifying an absolute target.</p>
-        <figure class="research-figure">
-          <img src="{{ '/assets/images/subgoal-hrm-architecture.webp' | relative_url }}" alt="Subgoal-Augmented HRM architecture and persistence timeline comparing manager periods P equals 1, 3, and 8" loading="lazy">
-          <figcaption>Subgoal-Augmented HRM: a high-level manager emits a directional latent subgoal that persists across multiple worker steps. The timeline illustrates the stability-adaptivity tradeoff studied in the paper.</figcaption>
-        </figure>
-        <p>The central variable is <strong>subgoal persistence</strong>: how long the directional intent remains active before the model re-plans. The results show that intent must persist across enough computational steps for longer-horizon structure to form, while remaining flexible enough to be revised. More frequent re-planning is not necessarily more adaptive.</p>
+        <div class="research-summary">
+          <div class="research-copy">
+            <p>This paper asks how long a hierarchical latent reasoner should preserve an intent before revising it, extending the Hierarchical Reasoning Model with a manager-worker interface that emits persistent directional subgoals in latent space.</p>
+            <p>It finds that subgoals must persist long enough for longer-horizon structure to form while remaining revisable, so more frequent re-planning is not necessarily more adaptive.</p>
+          </div>
+          <figure class="research-figure">
+            <img src="{{ '/assets/images/subgoal-hrm-architecture.webp' | relative_url }}" alt="Subgoal-Augmented HRM architecture and persistence timeline comparing manager periods P equals 1, 3, and 8" loading="lazy">
+            <figcaption>Subgoal-Augmented HRM: a directional latent subgoal persists across multiple worker steps.</figcaption>
+          </figure>
+        </div>
         <p class="entry-links primary-links"><a href="https://arxiv.org/abs/2606.03741">Paper</a><a href="https://github.com/Ayushichadha/scout">Code</a><a href="https://compositional-learning.github.io/">CompLearn workshop</a><a href="https://icml.cc/virtual/2026/workshop/54096">Official ICML poster schedule</a></p>
       </article>
 
       <article class="entry research-entry">
         <h3>A Score Is Not a Policy: Measuring Whether a Supervisory Module's Decisions Are Worth Making</h3>
         <p class="meta"><strong>Preprint · Under review · Sole author · 2026</strong></p>
-        <p>This work studies <strong>learned supervisory control</strong> in hierarchical latent reasoning. When a controller decides whether an internal commitment should persist or be revised, a state-dependent score can look like evidence that the system has learned when to intervene.</p>
-        <figure class="research-figure">
-          <img src="{{ '/assets/images/supervisory-timing-architecture.webp' | relative_url }}" alt="Manager-worker timing architecture showing retain or replace decisions between recurrent worker passes" loading="lazy">
-          <figcaption>Manager-worker timing: the supervisor observes the post-pass state and decides whether the active commitment should persist or be replaced for the next worker pass.</figcaption>
-        </figure>
-        <p><em>State dependence, behavioral adaptation, and decision value are different properties.</em></p>
-        <p>A supervisory score can vary with the model's internal state without meaningfully changing its decisions, and a policy can make different decisions across states without improving the final outcome. The paper separates these three levels rather than treating them as equivalent forms of adaptation.</p>
-        <p>A second question is <em>whether adaptation is worth learning at all.</em> If a strong non-adaptive policy already captures most of the available value, the more useful control problem may be to learn <strong>when to deviate from a strong prior</strong>, rather than making every decision fully adaptive.</p>
-        <p>This reframes supervisory control around <strong>decision value</strong>: how much improvement is actually available from changing the decision, and whether a learned controller can capture it.</p>
+        <div class="research-summary">
+          <div class="research-copy">
+            <p>This paper asks whether a learned supervisor can use a reasoner's internal state to decide when an active commitment should persist or be revised.</p>
+            <p>It separates state dependence, behavioral adaptation, and decision value, finding that an apparently adaptive score need not produce useful interventions while strong fixed policies can capture much of the available value.</p>
+          </div>
+          <figure class="research-figure">
+            <img src="{{ '/assets/images/supervisory-timing-architecture.webp' | relative_url }}" alt="Manager-worker timing architecture showing retain or replace decisions between recurrent worker passes" loading="lazy">
+            <figcaption>Manager-worker timing: the supervisor decides whether the active commitment should persist or be replaced.</figcaption>
+          </figure>
+        </div>
         <p class="entry-links"><a href="https://arxiv.org/abs/2609.00874">Paper</a><span>Code to be released</span></p>
       </article>
       <hr class="section-end">
@@ -126,7 +129,8 @@ description: Researcher and engineer working on reasoning and agentic systems, l
         <p class="venue-name"><a href="https://luma.com/0v3c010v">Paris Accel’s AI Innovate Series Hackathon</a></p>
         <p class="venue-detail">Selected to develop Saint at the one-day AI hackathon hosted by Accel and Iterate.</p>
       </div>
-      <p>Exploring how the questions in my research translate to agentic systems, particularly <strong>whether another attempt, repair, investigation, or reasoning step is actually worth taking.</strong></p>
+      <p>I'm investigating how AI systems can decide whether additional reasoning is worth the computation it requires. More time, another attempt, or a change in strategy does not necessarily lead to a better outcome.</p>
+      <p>Building on my research on persistence and adaptive revision, I'm exploring how agents might learn to allocate effort where it is most useful, with planned experiments in coding agents working across real software repositories.</p>
     </section>
 
     <section id="experience" aria-labelledby="experience-title">
@@ -136,15 +140,6 @@ description: Researcher and engineer working on reasoning and agentic systems, l
         <p class="role"><strong>Software Developer · ML &amp; Applied AI</strong> · August 2022 – December 2024</p>
         <p>Led the development of <strong>ShopiBot</strong>, a domain-specific AI system for Shopify developers, exploring retrieval architectures, query understanding, agentic workflows, and automated evaluation.</p>
         <p>Worked with dense retrieval, RAPTOR-inspired hierarchical retrieval, corrective and adaptive strategies, knowledge graphs, LangChain planners, and tool-calling workflows. Engineering improvements involving streaming inference, vector-database sharding, and caching reduced end-to-end latency from 53 seconds to 20 seconds.</p>
-        <div class="methods-reference" aria-labelledby="methods-title">
-          <p id="methods-title" class="methods-title">Selected methods &amp; papers</p>
-          <dl class="methods-list">
-            <div><dt><a href="https://arxiv.org/abs/2401.18059" target="_blank" rel="noopener noreferrer">RAPTOR</a></dt><dd>hierarchical retrieval</dd></div>
-            <div><dt><a href="https://arxiv.org/abs/2401.15884" target="_blank" rel="noopener noreferrer">Corrective RAG</a></dt><dd>retrieval correction</dd></div>
-            <div><dt><a href="https://arxiv.org/abs/2403.14403" target="_blank" rel="noopener noreferrer">Adaptive-RAG</a></dt><dd>query-dependent retrieval</dd></div>
-          </dl>
-          <p class="methods-note">References that informed this work.</p>
-        </div>
       </article>
       <article class="entry experience-entry">
         <h3>Unify</h3>
