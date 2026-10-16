@@ -58,7 +58,7 @@ h3{font-size:16px;line-height:1.45;color:var(--heading)}
 .venue-name a{font-weight:600;text-decoration-color:#879aaa}
 .venue-detail{padding-top:5px;color:#666;font-size:12.5px;line-height:1.55}
 .primary-links a{font-weight:600}
-.research-figure{max-width:590px;margin:24px auto 22px}
+.research-figure{max-width:500px;margin:24px auto 22px}
 .research-figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:#fff}
 .research-figure figcaption{margin-top:8px;color:#68747d;font-size:11.5px;line-height:1.5}
 .research-entry+.research-entry{margin-top:38px;padding-top:34px;border-top:1px solid var(--rule)}
